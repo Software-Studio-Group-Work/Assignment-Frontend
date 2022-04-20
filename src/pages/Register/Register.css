@@ -1,0 +1,42 @@
+#input-register{
+    border-radius: 10px !important;
+    background-color: #f4f6f5 !important;
+    height: 35px;
+    width: 250px;
+    margin:10px;
+    font-weight: 400;
+    font-size: 16px;
+    border-color: #FFFFFF;
+}
+#title-register{
+    font-weight: 500;
+    font-size: 40px;
+}
+#text-register{
+    font-weight: 400;
+    font-size: 16px;
+}
+
+#text-signin{
+    font-weight: 700;
+font-size: 16px;
+color: #BCA65E;
+margin-left: 5px;
+}
+
+#button-register{
+    height: 35px;
+    width: 250px;
+    border-radius: 10px;
+    background: #BCA65E;
+    margin:10px;
+    font-weight: 700;
+font-size: 18px;
+color: #FFFFFF;
+border-color: #BCA65E;
+}
+
+#register{
+    text-align: center;
+    margin-top: 175px;
+}
