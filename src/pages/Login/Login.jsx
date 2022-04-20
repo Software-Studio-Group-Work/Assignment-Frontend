@@ -9,7 +9,7 @@ function Login() {
   return (
     <div id="login">
     <Form>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group className="mb-3">
         <Form.Label id='title-login'>ลงชื่อเข้าใช้งาน</Form.Label><br/>
         <Form.Control  type="email-user-id" placeholder="อีเมล/ชื่อผู้ใช้" id="input-login"  /><br/>
         <Form.Control  type="password" placeholder="รหัสผ่าน" id="input-login" />
