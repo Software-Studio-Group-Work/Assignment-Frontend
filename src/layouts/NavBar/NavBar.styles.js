@@ -40,6 +40,7 @@ export const NavSearch = styled.div`
 `;
 
 export const NavMenu = styled.ul`
+  margin: 0;
   display: flex;
   align-items: center;
   list-style-type: none;

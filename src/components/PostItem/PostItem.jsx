@@ -4,7 +4,7 @@ import { PostItemContainer } from "./PostItem.styles";
 function PostItem({ bg }) {
   return (
     <PostItemContainer bg={bg}>
-      <h3>Lorem ipsum dolor sit amet.</h3>
+      <h5>Lorem ipsum dolor sit amet.</h5>
       <p>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fuga ipsam
         accusantium corrupti repellendus minima assumenda.

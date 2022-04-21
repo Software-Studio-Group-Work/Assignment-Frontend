@@ -19,7 +19,7 @@ export const HomeItem = styled.div`
     display: flex;
     align-items: center;
     background-color: #bca65e;
-    height: 20px;
+    height: 40px;
     color: #fff;
     font-size: 1.3rem;
     font-weight: bold;

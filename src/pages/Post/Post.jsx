@@ -45,16 +45,22 @@ function Post() {
                 rows="10"
                 style={{ backgroundColor: "#c4c4c4" }}
               ></textarea>
-            </div>  
+            </div>
           </div>
           <div
             class="container card"
             style={{ borderRadius: "10px", marginTop: "10px" }}
           >
-            <div class="container form-group"  style={{ marginTop: "10px" }}>
-                <label><strong>เพิ่มรูปภาพ</strong></label>
-              <input type="file" class="form-control" style={{border:"none"}} ></input>
-            </div>  
+            <div class="container form-group" style={{ marginTop: "10px" }}>
+              <label>
+                <strong>เพิ่มรูปภาพ</strong>
+              </label>
+              <input
+                type="file"
+                class="form-control"
+                style={{ border: "none" }}
+              ></input>
+            </div>
           </div>
         </div>
       </div>
