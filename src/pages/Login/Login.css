@@ -1,0 +1,45 @@
+
+#input-login{ 
+    border-radius: 10px;
+    height: 35px;
+    width: 250px;
+    margin:10px;
+    font-weight: 400;
+    font-size: 16px;
+    
+    border-color: #FFFFFF;
+  }
+
+#title-login{
+    font-weight: 500;
+    font-size: 40px;
+}
+
+#text-login{
+    font-weight: 400;
+    font-size: 16px;
+}
+
+#text-signup{
+    font-weight: 700;
+font-size: 16px;
+color: #BCA65E;
+margin-left: 5px;
+}
+
+#button-login{
+    height: 35px;
+    width: 250px;
+    border-radius: 10px;
+    background: #BCA65E;
+    margin:10px;
+    font-weight: 700;
+font-size: 18px;
+color: #FFFFFF;
+border-color: #BCA65E;
+}
+
+#login{
+    text-align: center;
+    margin-top: 175px;
+}
