@@ -2,11 +2,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import NavBar from "./layouts/NavBar/NavBar";
 import Home from "./pages/Home/Home";
-import Post from "./pages/Post/Post";
+import CreatePost from "./pages/CreatePost/CreatePost";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import SideBar from "./layouts/SideBar/SideBar";
 import User from "./pages/User/User";
+import Post from "./pages/Post/Post";
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/user" element={<User />} />
-            <Route path="/post" element={<Post />} />
+            <Route path="/create-post" element={<CreatePost />} />
+            <Route path="/post/:id" element={<Post />} />
           </Routes>
         </div>
       </div>

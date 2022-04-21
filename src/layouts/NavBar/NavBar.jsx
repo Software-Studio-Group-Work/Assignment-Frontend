@@ -22,7 +22,7 @@ function NavBar() {
       </NavSearch>
       <NavMenu>
         <NavList>
-          <NavLink to="/post">ตั้งกระทู้</NavLink>
+          <NavLink to="/create-post">ตั้งกระทู้</NavLink>
         </NavList>
         <NavList>
           ศาสนา
