@@ -3,7 +3,7 @@ import { HomeContainer, HomeItem } from "./Home.styles";
 import PostItem from "../../components/PostItem/PostItem";
 
 function Home() {
-  const lists = Array.from({ length: 10 }, (_, index) => index);
+  const lists = Array(10).fill(0);
   return (
     <HomeContainer>
       <HomeItem>
@@ -18,6 +18,7 @@ function Home() {
                 />
               );
             }
+            return null;
           })}
         </div>
       </HomeItem>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   NavContainer,
   NavLogo,
@@ -8,7 +8,6 @@ import {
   NavSearch,
 } from "./NavBar.styles";
 import { AiOutlineSearch } from "react-icons/ai";
-import { Dropdown } from "react-bootstrap";
 
 function NavBar() {
   return (
