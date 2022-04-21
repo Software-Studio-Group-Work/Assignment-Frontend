@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { NavLink as Link } from "react-router-dom";
+import { DropdownButton } from "react-bootstrap";
+
 export const NavContainer = styled.nav`
   background-color: #bca65e;
   height: 50px;
@@ -22,13 +24,13 @@ export const NavSearch = styled.div`
   display: flex;
   align-items: center;
   width: 40%;
-  height: 25px;
+  height: 30px;
   background-color: #f8e076;
   border-radius: 5px;
   padding: 3px 2px;
   justify-content: space-between;
   input {
-    width: 95%;
+    width: 97%;
     height: 100%;
     outline: none;
     border: none;
@@ -70,4 +72,9 @@ export const NavLink = styled(Link)`
   &.active {
     color: #000;
   }
+`;
+
+export const NavDropdown = styled(DropdownButton)`
+  color: #fff;
+  margin-left: 10px;
 `;

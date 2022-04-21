@@ -7,7 +7,7 @@ import {
 } from "./SideBar.styles";
 import { AiOutlineHome } from "react-icons/ai";
 import { MdOutlineFeed } from "react-icons/md";
-import { GrServices } from "react-icons/gr";
+import { BsSlack } from "react-icons/bs";
 
 function SideBar() {
   return (
@@ -27,7 +27,7 @@ function SideBar() {
         </SideList>
         <SideList>
           <SideLink to="/service">
-            <MdOutlineFeed />
+            <BsSlack />
             <span>Service</span>
           </SideLink>
         </SideList>
