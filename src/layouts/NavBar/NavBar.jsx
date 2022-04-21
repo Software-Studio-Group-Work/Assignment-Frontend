@@ -8,6 +8,7 @@ import {
   NavSearch,
 } from "./NavBar.styles";
 import { AiOutlineSearch } from "react-icons/ai";
+import { Dropdown } from "react-bootstrap";
 
 function NavBar() {
   return (
@@ -21,7 +22,7 @@ function NavBar() {
         <NavList>
           <NavLink to="/post">ตั้งกระทู้</NavLink>
         </NavList>
-        <NavList>เลือกศาสนา</NavList>
+        <NavList>ศาสนา</NavList>
         <NavList>
           <NavLink to="/login">เข้าสู่ระบบ/สมัครสมาชิก</NavLink>
         </NavList>

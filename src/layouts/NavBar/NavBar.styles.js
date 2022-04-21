@@ -7,7 +7,6 @@ export const NavContainer = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 `;
 
 export const NavLogo = styled(Link)`
@@ -53,6 +52,8 @@ export const NavMenu = styled.ul`
 
 export const NavList = styled.li`
   color: #fff;
+  display: flex;
+  align-items: center;
   @media screen and (max-width: 768px) {
     padding: 2rem 0;
   }
