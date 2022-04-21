@@ -1,0 +1,18 @@
+
+.App{
+    display:flex;
+    background-color: #C9BC8E;
+}
+
+.content{
+    background-color: #e3e3e3;
+    border-top-left-radius: 30px;
+    width: 100%;
+    padding: 20px;
+}
+
+@media screen and (max-width: 720px) {
+    .content{
+        border-top-left-radius: 0px;
+    }
+}
