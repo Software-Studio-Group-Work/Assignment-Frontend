@@ -77,4 +77,5 @@ export const NavLink = styled(Link)`
 export const NavDropdown = styled(DropdownButton)`
   color: #fff;
   margin-left: 10px;
+  width: 50px;
 `;

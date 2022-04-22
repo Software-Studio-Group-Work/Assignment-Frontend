@@ -22,7 +22,7 @@ function Post() {
           tenetur perspiciatis id repellendus voluptas!
         </p>
         <FooterItem>
-          <AiFillLike size={20} />
+          <AiFillLike />
           <span>|</span>
           <span>User</span>
         </FooterItem>

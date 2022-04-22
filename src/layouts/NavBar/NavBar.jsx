@@ -36,6 +36,9 @@ function NavBar() {
             <Dropdown.Item onClick={() => setReligion("คริสต์")}>
               คริสต์
             </Dropdown.Item>
+            <Dropdown.Item onClick={() => setReligion("ทั้งหมด")}>
+              ทั้งหมด
+            </Dropdown.Item>
           </NavDropdown>
         </NavList>
         <NavList>
