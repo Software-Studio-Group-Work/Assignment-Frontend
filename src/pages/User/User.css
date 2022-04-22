@@ -1,9 +1,7 @@
 #user {
-  width: 1141px;
-  height: 600px;
   background: #ffffff;
   border-radius: 10px;
-  margin: 50px;
+  margin-top: 20px;
   display: flex;
 }
 
