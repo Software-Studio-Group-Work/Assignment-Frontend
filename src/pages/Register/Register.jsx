@@ -8,7 +8,7 @@ function Register() {
   return (
       <div id="register">
     <Form>
-      <Form.Group className="mb-3">
+      <Form.Group className="mb-3" id="register-from">
         <Form.Label id="title-register">สมัครสมาชิก</Form.Label><br/>
         <Form.Control  type="user-id" placeholder="ชื่อผู้ใช้" id="input-register" /><br/>
         <Form.Control  type="email" placeholder="อีเมล"  id="input-register"/><br/>
