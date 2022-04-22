@@ -8,6 +8,7 @@ import Register from "./pages/Register/Register";
 import SideBar from "./layouts/SideBar/SideBar";
 import User from "./pages/User/User";
 import Post from "./pages/Post/Post";
+import CreateAnnounce from "./pages/CreateAnnounce/CreateAnnounce";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <div className="content">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/create-announce" element={<CreateAnnounce/>}/>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/user" element={<User />} />

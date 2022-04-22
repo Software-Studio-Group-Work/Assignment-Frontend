@@ -54,7 +54,7 @@ function CreateAnnounce() {
             style={{ borderRadius: "10px", marginTop: "10px" }}
           >
             <button type="submit" class="btn btn-success mb-2">
-              ส่งกระทู้
+              ประกาศ
             </button>
           </div>
         </div>
