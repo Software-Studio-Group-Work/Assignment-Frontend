@@ -1,76 +1,88 @@
-#user{
-    width: 1141px;
-height: 600px;
-background: #FFFFFF;
-border-radius: 10px;
-margin: 50px;
-display: flex;
+#user {
+  width: 1141px;
+  height: 600px;
+  background: #ffffff;
+  border-radius: 10px;
+  margin: 50px;
+  display: flex;
 }
 
-#input-user{
-    background: #C4C4C4;
-border-radius: 5px;
-border-color: #C4C4C4;
-height: 25px;
-width: 500px;
-margin-top: 15px;
-margin-bottom: 15px;
+#input-user {
+  background: #c4c4c4;
+  border-radius: 5px;
+  border-color: #c4c4c4;
+  height: 25px;
+  width: 500px;
 }
 
-#text-user{
-    font-weight: 500;
-    font-size: 18px; 
+#text-user {
+  font-weight: 500;
+  font-size: 18px;
 }
 
-#title-user{
-    font-weight: 500;
-font-size: 24px;
+#title-user {
+  font-weight: 500;
+  font-size: 24px;
 }
 
-#button-user{
-    height: 35px;
-    width: 100px;
-    border-radius: 10px;
-    background: #BCA65E;
-    margin:10px;
-    font-weight: 700;
-font-size: 18px;
-color: #FFFFFF;
-border-color: #BCA65E;
-margin-left: 500px;
+#button-user {
+  height: 35px;
+  width: 100px;
+  border-radius: 10px;
+  background: #bca65e;
+  margin: 10px;
+  font-weight: 700;
+  font-size: 18px;
+  color: #ffffff;
+  border-color: #bca65e;
+  margin-left: 400px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
 }
-#circle{
-    width: 200px;
-    height: 200px;
-    background: #C4C4C4;
-    border-radius: 100%;
-}
-
-#text-upload{
-    font-weight: 500;
-font-size: 16px;
-}
-#upload-image{
-    width: 220px;
-height: 30px;
-background: #C4C4C4;
-border-radius: 5px;
-}
-#button-upload{
-    height: 20px;
-    width: 100px;
-    margin: 5px;
-
-    
+#circle {
+  width: 200px;
+  height: 200px;
+  background: #c4c4c4;
+  border-radius: 100%;
 }
 
-#personal-user{
-    margin-top:250px;
-    margin-left: 150px;
+#text-upload {
+  font-weight: 500;
+  font-size: 16px;
+}
+#upload-image {
+  width: 220px;
+  height: 30px;
+  background: #c4c4c4;
+  border-radius: 5px;
+  display:flex;
+  align-items: center;
+  justify-content: left;
+}
+#button-upload {
+  height: 20px;
+  width: 125px;
+  margin: 5px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
 }
 
+#personal-user {
+  margin-top: 150px;
+  margin-left: 250px;
+}
 
-#upload{
-    margin-top: 55px;
-    margin-left: 50px;
+#upload {
+  margin-top: 55px;
+  margin-left: 50px;
+  font-size: 12px;
+}
+
+#personal-from {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: left;
 }
