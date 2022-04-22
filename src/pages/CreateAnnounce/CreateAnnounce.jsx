@@ -15,7 +15,7 @@ function CreateAnnounce() {
               <div class="container card" style={{ borderRadius: "10px" }}>
                 <div class="container form-group">
                   <label for="InputQuestion" style={{ marginTop: "10px" }}>
-                    <strong>1.ระบุคำถามของคุณ</strong>
+                    <strong>1.ระบุสิ่งที่คุณต้องการประกาศ</strong>
                   </label>
                   <input
                     type="text"
@@ -34,7 +34,7 @@ function CreateAnnounce() {
               >
                 <div class="container form-group">
                   <label for="InputQuestionDetail" style={{ marginTop: "10px" }}>
-                    <strong>2.เขียนรายละเอียดของคำถาม</strong>
+                    <strong>2.เขียนรายละเอียดของประกาศ</strong>
                   </label>
                   <textarea
                     type="text"
