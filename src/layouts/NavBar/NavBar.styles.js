@@ -18,6 +18,15 @@ export const NavLogo = styled(Link)`
   font-size: 1.5rem;
   font-weight: bold;
   color: #fff;
+  span {
+    margin: 10px;
+  }
+  @media screen and (max-width: 500px) {
+    span {
+      margin: 10px;
+      display: none;
+    }
+  }
 `;
 
 export const NavSearch = styled.div`
@@ -36,7 +45,12 @@ export const NavSearch = styled.div`
     border: none;
     border-radius: 5px;
   }
-  @media screen and (max-width: 768px) {
+
+  @media screen and (max-width: 1100px) {
+    width: 30%;
+  }
+
+  @media screen and (max-width: 1000px) {
     display: none;
   }
 `;
@@ -48,8 +62,8 @@ export const NavMenu = styled.ul`
   list-style-type: none;
   height: auto;
   column-gap: 30px;
-  @media screen and (max-width: 520px) {
-    display: none;
+  @media screen and (max-width: 500px) {
+    column-gap: 15px;
   }
 `;
 
@@ -61,9 +75,6 @@ export const NavList = styled.li`
   span {
     cursor: pointer;
   }
-  @media screen and (max-width: 768px) {
-    padding: 2rem 0;
-  }
 `;
 
 export const NavLink = styled(Link)`
@@ -73,8 +84,16 @@ export const NavLink = styled(Link)`
   text-decoration: none;
   padding: 0 1rem;
   cursor: pointer;
+
+  button {
+    color: #fff;
+  }
   &.active {
     color: #000;
+    button {
+      background-color: #f8e076;
+      color: #000;
+    }
   }
 `;
 

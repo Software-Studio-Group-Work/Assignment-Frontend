@@ -9,7 +9,7 @@ import { AiOutlineHome } from "react-icons/ai";
 import { MdOutlineFeed } from "react-icons/md";
 import { BsSlack } from "react-icons/bs";
 
-function SideBar() {
+function SideBar({ isAuth }) {
   return (
     <SideBarContainer>
       <SideMenu>
@@ -19,12 +19,14 @@ function SideBar() {
             <span>หน้าแรก</span>
           </SideLink>
         </SideList>
-        <SideList>
-          <SideLink to="/myfeed">
-            <MdOutlineFeed />
-            <span>My Feed</span>
-          </SideLink>
-        </SideList>
+        {isAuth && (
+          <SideList>
+            <SideLink to="/myfeed">
+              <MdOutlineFeed />
+              <span>My Feed</span>
+            </SideLink>
+          </SideList>
+        )}
         <SideList>
           <SideLink to="/landmarks">
             <BsSlack />

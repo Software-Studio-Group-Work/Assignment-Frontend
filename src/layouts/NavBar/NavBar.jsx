@@ -13,6 +13,7 @@ import { Dropdown, Button } from "react-bootstrap";
 import { ReligionContext } from "../../contexts/ReligionContext";
 import { UserContext } from "../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
+import { FaDharmachakra } from "react-icons/fa";
 
 function NavBar({ isAuth }) {
   const navigate = useNavigate();
@@ -20,7 +21,10 @@ function NavBar({ isAuth }) {
   const { setUser } = useContext(UserContext);
   return (
     <NavContainer>
-      <NavLogo to="/">รอบรู้โลกธรรมะ</NavLogo>
+      <NavLogo to="/">
+        <FaDharmachakra />
+        <span>รอบรู้โลกธรรมะ</span>
+      </NavLogo>
       <NavSearch>
         <input type="text" />
         <AiOutlineSearch size={20} />
@@ -49,7 +53,9 @@ function NavBar({ isAuth }) {
             </NavDropdown>
           </NavList>
           <NavList>
-            <NavLink to="/login">เข้าสู่ระบบ</NavLink>
+            <NavLink to="/login">
+              <Button variant="warning">Login</Button>
+            </NavLink>
           </NavList>
         </NavMenu>
       ) : (
@@ -77,7 +83,7 @@ function NavBar({ isAuth }) {
           <NavList>
             <NavLink to="/login">
               <Button variant="danger" onClick={() => setUser(null)}>
-                ออกจากระบบ
+                Logout
               </Button>
             </NavLink>
           </NavList>
