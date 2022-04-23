@@ -24,7 +24,7 @@ function App() {
         <BrowserRouter>
           <NavBar isAuth={user} />
           <div className="App">
-            <SideBar isAuth={user} role="admin" />
+            <SideBar isAuth={user} role={user?.role} />
             <div className="content">
               <Routes>
                 <Route path="/" element={<Home />} />

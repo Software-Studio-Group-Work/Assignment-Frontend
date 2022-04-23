@@ -11,7 +11,7 @@ function Login() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setUser({ username, password });
+    setUser({ username, role: "admin" });
     navigate("/");
   };
 
