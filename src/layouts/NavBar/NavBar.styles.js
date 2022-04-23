@@ -21,7 +21,7 @@ export const NavLogo = styled(Link)`
   span {
     margin: 10px;
   }
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 690px) {
     span {
       margin: 10px;
       display: none;

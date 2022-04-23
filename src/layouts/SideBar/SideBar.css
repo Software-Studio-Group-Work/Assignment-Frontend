@@ -1,0 +1,24 @@
+ .menu {
+    height: 100vh;
+    min-height: 640px;
+    display: block;
+  }
+  
+  .menu::after {
+    color: #ffffff;
+  }
+  
+  @media screen and (max-width: 1200px) {
+    .menu {
+      display: block;
+      position: fixed;
+      height: 100vh;
+      min-height: 640px;
+      left: -100%;
+      transition: 0.5s;
+    }
+    .menu.active {
+      left: 0;
+      z-index: 3;
+    }
+  }

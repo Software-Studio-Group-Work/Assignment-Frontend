@@ -1,9 +1,9 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 
 export const ReligionContext = createContext();
 
 export const ReligionContextProvider = ({ children }) => {
-  const [religion, setReligion] = useState("ทั้งหมด");
+  const [religion, setReligion] = useState("all");
   return (
     <ReligionContext.Provider value={{ religion, setReligion }}>
       {children}
