@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { HomeContainer, HomeItem } from "./Home.styles";
 import PostItem from "../../components/PostItem/PostItem";
+import { ReligionContext } from "../../contexts/ReligionContext";
 
 function Home() {
+  const { religion } = useContext(ReligionContext);
   const userId = "1";
   const role = "user";
-
   const announcements = [
     {
       title: "ประกาศปิดปรับปรุงระบบ",
