@@ -11,6 +11,7 @@ import Post from "./pages/Post/Post";
 import CreateAnnounce from "./pages/CreateAnnounce/CreateAnnounce";
 import MyFeed from "./pages/MyFeed/MyFeed";
 import Landmarks from "./pages/Landmarks/Landmarks";
+import CreateLandmark from "./pages/CreateLandmark/CreateLandmark";
 import { UserContext } from "./contexts/UserContext";
 import { ReligionContextProvider } from "./contexts/ReligionContext";
 import { useState } from "react";
@@ -23,7 +24,7 @@ function App() {
         <BrowserRouter>
           <NavBar isAuth={user} />
           <div className="App">
-            <SideBar isAuth={user} />
+            <SideBar isAuth={user} role="admin" />
             <div className="content">
               <Routes>
                 <Route path="/" element={<Home />} />
@@ -35,6 +36,7 @@ function App() {
                 <Route path="/post/:id" element={<Post />} />
                 <Route path="/myfeed" element={<MyFeed />} />
                 <Route path="/landmarks" element={<Landmarks />} />
+                <Route path="/create-landmark" element={<CreateLandmark />} />
               </Routes>
             </div>
           </div>

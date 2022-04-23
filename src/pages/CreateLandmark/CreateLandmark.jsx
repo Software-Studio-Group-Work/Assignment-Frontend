@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function CreateAnnounce() {
+function CreateLandmark() {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [link, setLink] = useState("");
+  const [image, setImage] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(title, description);
+    console.log(title, description, link, image);
     navigate("/");
   };
   return (
@@ -25,7 +27,7 @@ function CreateAnnounce() {
           <div className="container card" style={{ borderRadius: "10px" }}>
             <div className="container form-group">
               <label style={{ marginTop: "10px" }}>
-                <strong>ระบุสิ่งที่คุณต้องการประกาศ</strong>
+                <strong>ระบุชื่อสถานที่สำคัญ</strong>
               </label>
               <input
                 type="text"
@@ -46,7 +48,7 @@ function CreateAnnounce() {
           >
             <div className="container form-group">
               <label style={{ marginTop: "10px" }}>
-                <strong>เขียนรายละเอียดของประกาศ</strong>
+                <strong>เขียนรายละเอียดสถานที่สำคัญ</strong>
               </label>
               <textarea
                 type="text"
@@ -61,6 +63,45 @@ function CreateAnnounce() {
               ></textarea>
             </div>
           </div>
+
+          <div
+            className="container card"
+            style={{ borderRadius: "10px", marginTop: "10px" }}
+          >
+            <div className="container form-group">
+              <label style={{ marginTop: "10px" }}>
+                <strong>ระบุลิงค์สถานที่สำคัญ</strong>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="question"
+                aria-describedby=""
+                placeholder=""
+                style={{ backgroundColor: "#c4c4c4" }}
+                value={link}
+                onChange={(e) => setLink(e.target.value)}
+              ></input>
+            </div>
+          </div>
+
+          <div
+            className="container card"
+            style={{ borderRadius: "10px", marginTop: "10px" }}
+          >
+            <div className="container form-group" style={{ marginTop: "10px" }}>
+              <label>
+                <strong>รูปภาพ</strong>
+              </label>
+              <input
+                type="file"
+                className="form-control"
+                style={{ border: "none" }}
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+              ></input>
+            </div>
+          </div>
         </div>
       </div>
       <div
@@ -68,11 +109,11 @@ function CreateAnnounce() {
         style={{ borderRadius: "10px", marginTop: "10px" }}
       >
         <button type="submit" className="btn btn-success mb-2">
-          สร้างประกาศ
+          เพิ่มสถานที่สำคัญ
         </button>
       </div>
     </form>
   );
 }
 
-export default CreateAnnounce;
+export default CreateLandmark;

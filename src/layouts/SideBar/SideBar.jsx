@@ -7,12 +7,16 @@ import {
   MobileMenu,
 } from "./SideBar.styles";
 import { AiOutlineHome } from "react-icons/ai";
-import { MdOutlineFeed } from "react-icons/md";
+import {
+  MdOutlineFeed,
+  MdOutlineAnnouncement,
+  MdOutlinePlace,
+} from "react-icons/md";
 import { FaLandmark } from "react-icons/fa";
 import { FiMenu, FiX } from "react-icons/fi";
 import "./SideBar.css";
 
-function SideBar({ isAuth }) {
+function SideBar({ isAuth, role }) {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const handleMenuClick = () => setClick(false);
@@ -44,6 +48,22 @@ function SideBar({ isAuth }) {
                 <span>สถานที่สำคัญ</span>
               </SideLink>
             </SideList>
+            {role === "admin" && (
+              <>
+                <SideList onClick={handleMenuClick}>
+                  <SideLink to="/create-announce">
+                    <MdOutlineAnnouncement />
+                    <span>เพิ่มประกาศ</span>
+                  </SideLink>
+                </SideList>
+                <SideList onClick={handleMenuClick}>
+                  <SideLink to="/create-landmark">
+                    <MdOutlinePlace />
+                    <span>เพิ่มสถานที่สำคัญ</span>
+                  </SideLink>
+                </SideList>
+              </>
+            )}
           </SideMenu>
         </SideBarContainer>
       </div>
