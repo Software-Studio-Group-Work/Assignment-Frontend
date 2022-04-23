@@ -5,16 +5,27 @@ import {
   PostItem,
   CommentItem,
   FooterItem,
+  Header,
 } from "./Post.styles";
-
+import { AiFillDelete } from "react-icons/ai";
+import { BiHide } from "react-icons/bi";
 import { AiFillLike } from "react-icons/ai";
+import { AiFillEdit } from "react-icons/ai";
 
 function Post() {
   const { id } = useParams();
+
   return (
     <PostContainer>
       <PostItem>
-        <h4>รีวิวหนังสือเล่มที่ {id}</h4>
+        <Header>
+          <h4>รีวิวหนังสือเล่มที่ {id}</h4>
+          <div className="icons">
+            <BiHide />
+            <AiFillEdit />
+            <AiFillDelete />
+          </div>
+        </Header>
         <img alt="post" src="https://inwfile.com/s-fq/zp2qee.jpg" />
         <p>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus,
@@ -28,23 +39,14 @@ function Post() {
         </FooterItem>
       </PostItem>
       <CommentItem>
-        <p>Lorem ipsum dolor sit amet.</p>
-        <FooterItem>
-          <AiFillLike />
-          <span>|</span>
-          <span>User</span>
-        </FooterItem>
-      </CommentItem>
-      <CommentItem>
-        <p>Lorem ipsum dolor sit amet.</p>
-        <FooterItem>
-          <AiFillLike />
-          <span>|</span>
-          <span>User</span>
-        </FooterItem>
-      </CommentItem>
-      <CommentItem>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <Header>
+          <p>Lorem ipsum dolor sit amet.</p>
+          <div className="icons">
+            <BiHide />
+            <AiFillEdit />
+            <AiFillDelete />
+          </div>
+        </Header>
         <FooterItem>
           <AiFillLike />
           <span>|</span>

@@ -19,9 +19,9 @@ export const HomeItem = styled.div`
     display: flex;
     align-items: center;
     background-color: #bca65e;
-    height: 40px;
+    height: 45px;
     color: #fff;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: bold;
   }
 

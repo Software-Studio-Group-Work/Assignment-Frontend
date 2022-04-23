@@ -57,4 +57,24 @@ export const FooterItem = styled.div`
     font-size: 1.2rem;
     cursor: pointer;
   }
+  svg:hover {
+    color: #ffc107;
+  }
+`;
+
+export const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  .icons {
+    display: flex;
+    column-gap: 14px;
+    font-size: 1.2rem;
+    svg {
+      cursor: pointer;
+    }
+    svg:hover {
+      color: #f8e076;
+    }
+  }
 `;
