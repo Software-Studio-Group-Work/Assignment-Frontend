@@ -28,7 +28,7 @@ function App() {
             <Route path="/create-post" element={<CreatePost />} />
             <Route path="/post/:id" element={<Post />} />
             <Route path="/myfeed" element={<MyFeed />} />
-            <Route path="/service" element={<Service />} />
+            <Route path="/landmarks" element={<Service />} />
           </Routes>
         </div>
       </div>

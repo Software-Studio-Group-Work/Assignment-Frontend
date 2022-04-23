@@ -26,9 +26,9 @@ function SideBar() {
           </SideLink>
         </SideList>
         <SideList>
-          <SideLink to="/service">
+          <SideLink to="/landmarks">
             <BsSlack />
-            <span>Service</span>
+            <span>สถานที่สำคัญ</span>
           </SideLink>
         </SideList>
       </SideMenu>
