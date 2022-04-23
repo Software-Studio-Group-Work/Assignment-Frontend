@@ -12,6 +12,7 @@ function CreatePost() {
     console.log(title, description, image);
     navigate("/");
   };
+
   return (
     <form onSubmit={onSubmit}>
       <div
@@ -25,7 +26,7 @@ function CreatePost() {
         <div className="card-body">
           <div className="container card" style={{ borderRadius: "10px" }}>
             <div className="container form-group">
-              <label for="InputQuestion" style={{ marginTop: "10px" }}>
+              <label style={{ marginTop: "10px" }}>
                 <strong>หัวข้อกระทู้ธรรม</strong>
               </label>
               <input
@@ -64,7 +65,7 @@ function CreatePost() {
             style={{ borderRadius: "10px", marginTop: "10px" }}
           >
             <div className="container form-group">
-              <label for="InputQuestionDetail" style={{ marginTop: "10px" }}>
+              <label style={{ marginTop: "10px" }}>
                 <strong>รายละเอียดกระทู้ธรรม</strong>
               </label>
               <textarea

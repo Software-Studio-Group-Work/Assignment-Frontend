@@ -1,38 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   SideBarContainer,
   SideMenu,
   SideList,
   SideLink,
+  MobileMenu,
 } from "./SideBar.styles";
 import { AiOutlineHome } from "react-icons/ai";
 import { MdOutlineFeed } from "react-icons/md";
-import { BsSlack } from "react-icons/bs";
+import { FaLandmark } from "react-icons/fa";
+import { FiMenu, FiX } from "react-icons/fi";
+import "./SideBar.css";
 
-function SideBar() {
+function SideBar({ isAuth }) {
+  const [click, setClick] = useState(false);
+  const handleClick = () => setClick(!click);
+  const handleMenuClick = () => setClick(false);
   return (
-    <SideBarContainer>
-      <SideMenu>
-        <SideList>
-          <SideLink to="/">
-            <AiOutlineHome />
-            <span>หน้าแรก</span>
-          </SideLink>
-        </SideList>
-        <SideList>
-          <SideLink to="/myfeed">
-            <MdOutlineFeed />
-            <span>My Feed</span>
-          </SideLink>
-        </SideList>
-        <SideList>
-          <SideLink to="/landmarks">
-            <BsSlack />
-            <span>สถานที่สำคัญ</span>
-          </SideLink>
-        </SideList>
-      </SideMenu>
-    </SideBarContainer>
+    <div>
+      <MobileMenu onClick={handleClick}>
+        {click ? <FiX /> : <FiMenu />}
+      </MobileMenu>
+      <div className={click ? "menu active" : "menu"}>
+        <SideBarContainer>
+          <SideMenu>
+            <SideList onClick={handleMenuClick}>
+              <SideLink to="/">
+                <AiOutlineHome />
+                <span>หน้าแรก</span>
+              </SideLink>
+            </SideList>
+            {isAuth && (
+              <SideList onClick={handleMenuClick}>
+                <SideLink to="/myfeed">
+                  <MdOutlineFeed />
+                  <span>My Feed</span>
+                </SideLink>
+              </SideList>
+            )}
+            <SideList onClick={handleMenuClick}>
+              <SideLink to="/landmarks">
+                <FaLandmark />
+                <span>สถานที่สำคัญ</span>
+              </SideLink>
+            </SideList>
+          </SideMenu>
+        </SideBarContainer>
+      </div>
+    </div>
   );
 }
 

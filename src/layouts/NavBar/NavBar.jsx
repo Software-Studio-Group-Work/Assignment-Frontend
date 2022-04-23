@@ -13,14 +13,24 @@ import { Dropdown, Button } from "react-bootstrap";
 import { ReligionContext } from "../../contexts/ReligionContext";
 import { UserContext } from "../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
-
+import { FaDharmachakra } from "react-icons/fa";
+const religions = {
+  buddhist: "พุทธ",
+  islam: "อิสลาม",
+  christ: "คริสต์",
+  all: "ทั้งหมด",
+};
 function NavBar({ isAuth }) {
   const navigate = useNavigate();
   const { religion, setReligion } = useContext(ReligionContext);
   const { setUser } = useContext(UserContext);
+
   return (
     <NavContainer>
-      <NavLogo to="/">รอบรู้โลกธรรมะ</NavLogo>
+      <NavLogo to="/">
+        <FaDharmachakra />
+        <span>รอบรู้โลกธรรมะ</span>
+      </NavLogo>
       <NavSearch>
         <input type="text" />
         <AiOutlineSearch size={20} />
@@ -33,23 +43,29 @@ function NavBar({ isAuth }) {
           </NavList>
           <NavList>
             ศาสนา
-            <NavDropdown variant="secondary" id="dropdown" title={religion}>
-              <Dropdown.Item onClick={() => setReligion("พุทธ")}>
+            <NavDropdown
+              variant="secondary"
+              id="dropdown"
+              title={religions[religion]}
+            >
+              <Dropdown.Item onClick={() => setReligion("buddhist")}>
                 พุทธ
               </Dropdown.Item>
-              <Dropdown.Item onClick={() => setReligion("อิสลาม")}>
+              <Dropdown.Item onClick={() => setReligion("islam")}>
                 อิสลาม
               </Dropdown.Item>
-              <Dropdown.Item onClick={() => setReligion("คริสต์")}>
+              <Dropdown.Item onClick={() => setReligion("christ")}>
                 คริสต์
               </Dropdown.Item>
-              <Dropdown.Item onClick={() => setReligion("ทั้งหมด")}>
+              <Dropdown.Item onClick={() => setReligion("all")}>
                 ทั้งหมด
               </Dropdown.Item>
             </NavDropdown>
           </NavList>
           <NavList>
-            <NavLink to="/login">เข้าสู่ระบบ</NavLink>
+            <NavLink to="/login">
+              <Button variant="warning">Login</Button>
+            </NavLink>
           </NavList>
         </NavMenu>
       ) : (
@@ -59,17 +75,21 @@ function NavBar({ isAuth }) {
           </NavList>
           <NavList>
             ศาสนา
-            <NavDropdown variant="secondary" id="dropdown" title={religion}>
-              <Dropdown.Item onClick={() => setReligion("พุทธ")}>
+            <NavDropdown
+              variant="secondary"
+              id="dropdown"
+              title={religions[religion]}
+            >
+              <Dropdown.Item onClick={() => setReligion("buddhist")}>
                 พุทธ
               </Dropdown.Item>
-              <Dropdown.Item onClick={() => setReligion("อิสลาม")}>
+              <Dropdown.Item onClick={() => setReligion("islam")}>
                 อิสลาม
               </Dropdown.Item>
-              <Dropdown.Item onClick={() => setReligion("คริสต์")}>
+              <Dropdown.Item onClick={() => setReligion("christ")}>
                 คริสต์
               </Dropdown.Item>
-              <Dropdown.Item onClick={() => setReligion("ทั้งหมด")}>
+              <Dropdown.Item onClick={() => setReligion("all")}>
                 ทั้งหมด
               </Dropdown.Item>
             </NavDropdown>
@@ -77,7 +97,7 @@ function NavBar({ isAuth }) {
           <NavList>
             <NavLink to="/login">
               <Button variant="danger" onClick={() => setUser(null)}>
-                ออกจากระบบ
+                Logout
               </Button>
             </NavLink>
           </NavList>
