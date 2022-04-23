@@ -57,6 +57,10 @@ export const NavList = styled.li`
   color: #fff;
   display: flex;
   align-items: center;
+
+  span {
+    cursor: pointer;
+  }
   @media screen and (max-width: 768px) {
     padding: 2rem 0;
   }
@@ -77,5 +81,5 @@ export const NavLink = styled(Link)`
 export const NavDropdown = styled(DropdownButton)`
   color: #fff;
   margin-left: 10px;
-  width: 50px;
+  width: 70px;
 `;
