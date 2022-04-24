@@ -2,21 +2,24 @@ import React, { useContext } from "react";
 import { HomeContainer, HomeItem } from "./Home.styles";
 import PostItem from "../../components/PostItem/PostItem";
 import { ReligionContext } from "../../contexts/ReligionContext";
+import {
+  useGetAnnouncements,
+  useDeleteAnnouncement,
+} from "../../hooks/useAnnouncement";
+import { UserContext } from "../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+  const navigate = useNavigate();
+  const { user } = useContext(UserContext);
   const { religion } = useContext(ReligionContext);
-  const userId = "1";
-  const role = "user";
-  const announcements = [
-    {
-      title: "ประกาศปิดปรับปรุงระบบ",
-      description: "ประกาศปิดปรับปรุงระบบ วันที่ 12 กันยายน 2563",
-    },
-    {
-      title: "ประกาศปิดปรับปรุงระบบ",
-      description: "ประกาศปิดปรับปรุงระบบ วันที่ 15 กันยายน 2563",
-    },
-  ];
+  const { data: announcements } = useGetAnnouncements();
+  const { mutate: deleteAnnouncement } = useDeleteAnnouncement();
+
+  const onAnnouncementDelete = (id) => {
+    deleteAnnouncement(id);
+  };
+
   const posts = [
     {
       id: "1",
@@ -60,15 +63,17 @@ function Home() {
       <HomeItem>
         <div className="item-header">Announcement</div>
         <div className="item-content">
-          {announcements.map((announcement, index) => {
+          {announcements?.map((announcement, index) => {
             return (
-              <div key={index}>
+              <div key={announcement.id}>
                 <PostItem
                   bg={index % 2 === 0 ? "#fff" : "#c4c4c4"}
                   item={announcement}
-                  role={role}
-                  userId={userId}
+                  role={user?.role}
+                  userId={user?.id}
                   type="announcement"
+                  onDelete={() => onAnnouncementDelete(announcement.id)}
+                  onEdit={() => navigate(`/edit-announce/${announcement.id}`)}
                 />
               </div>
             );
@@ -84,8 +89,8 @@ function Home() {
                 <PostItem
                   bg={index % 2 === 0 ? "#fff" : "#c4c4c4"}
                   item={post}
-                  role={role}
-                  userId={userId}
+                  role={user?.role}
+                  userId={user?.id}
                   type="post"
                 />
               </div>
