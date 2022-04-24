@@ -1,5 +1,5 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   PostContainer,
   PostItem,
@@ -11,31 +11,43 @@ import { AiFillDelete } from "react-icons/ai";
 import { BiHide } from "react-icons/bi";
 import { AiFillLike } from "react-icons/ai";
 import { AiFillEdit } from "react-icons/ai";
+import { useGetPost } from "../../hooks/usePost";
+import { UserContext } from "../../contexts/UserContext";
 
 function Post() {
+  const navigate = useNavigate();
+  const { user } = useContext(UserContext);
   const { id } = useParams();
+  const { data, isLoading, isError } = useGetPost(id);
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error...</div>;
 
   return (
     <PostContainer>
       <PostItem>
         <Header>
-          <h4>รีวิวหนังสือเล่มที่ {id}</h4>
-          <div className="icons">
-            <BiHide />
-            <AiFillEdit />
-            <AiFillDelete />
-          </div>
+          <h4>{data?.title}</h4>
+          {user && user.id === data?.userId && (
+            <div className="icons">
+              <BiHide />
+              <AiFillEdit onClick={() => navigate(`/edit-post/${id}`)} />
+              <AiFillDelete />
+            </div>
+          )}
+          {user && user.id !== data?.userId && user.role === "admin" && (
+            <div className="icons">
+              <BiHide />
+              <AiFillDelete />
+            </div>
+          )}
         </Header>
-        <img alt="post" src="https://inwfile.com/s-fq/zp2qee.jpg" />
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus,
-          blanditiis. Voluptates asperiores dicta, perferendis exercitationem
-          tenetur perspiciatis id repellendus voluptas!
-        </p>
+        {data?.picture && <img alt="post" src={data?.picture} />}
+
+        <p>{data?.description}</p>
         <FooterItem>
           <AiFillLike />
           <span>|</span>
-          <span>User</span>
+          <span>สมาชิกหมายเลข: {data?.userId}</span>
         </FooterItem>
       </PostItem>
       <CommentItem>
@@ -50,7 +62,7 @@ function Post() {
         <FooterItem>
           <AiFillLike />
           <span>|</span>
-          <span>User</span>
+          <span>สมาชิกหมายเลข: User</span>
         </FooterItem>
       </CommentItem>
     </PostContainer>

@@ -17,7 +17,7 @@ function PostItem({ bg, item, role, userId, type, onDelete, onHide, onEdit }) {
           <h5>{item?.title}</h5>
         )}
 
-        {userId && role === "admin" && (
+        {userId && role === "admin" && userId !== item.userId && (
           <div className="post-item-icons">
             {type === "announcement" && (
               <>
