@@ -16,6 +16,7 @@ import { UserContext } from "./contexts/UserContext";
 import { ReligionContextProvider } from "./contexts/ReligionContext";
 import { useState } from "react";
 import EditAnnounce from "./pages/EditAnnounce/EditAnnounce";
+import EditPost from "./pages/EditPost/EditPost";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -29,13 +30,14 @@ function App() {
             <div className="content">
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/create-announce" element={<CreateAnnounce />} />
-                <Route path="/edit-announce/:id" element={<EditAnnounce />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/user" element={<User />} />
+                <Route path="/create-announce" element={<CreateAnnounce />} />
+                <Route path="/edit-announce/:id" element={<EditAnnounce />} />
                 <Route path="/create-post" element={<CreatePost />} />
+                <Route path="/edit-post/:id" element={<EditPost />} />
                 <Route path="/post/:id" element={<Post />} />
+                <Route path="/user" element={<User />} />
                 <Route path="/myfeed" element={<MyFeed />} />
                 <Route path="/landmarks" element={<Landmarks />} />
                 <Route path="/create-landmark" element={<CreateLandmark />} />
