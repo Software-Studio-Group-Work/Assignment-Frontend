@@ -14,12 +14,29 @@ import Landmarks from "./pages/Landmarks/Landmarks";
 import CreateLandmark from "./pages/CreateLandmark/CreateLandmark";
 import { UserContext } from "./contexts/UserContext";
 import { ReligionContextProvider } from "./contexts/ReligionContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import EditAnnounce from "./pages/EditAnnounce/EditAnnounce";
 import EditPost from "./pages/EditPost/EditPost";
+import httpClient from "./utils/httpClient";
 
 function App() {
+  const token = localStorage.getItem("token");
   const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    if (token) {
+      httpClient
+        .get(`User/GetUserByToken/${token}`)
+        .then((res) => {
+          setUser(res.data);
+        })
+        .catch((err) => {
+          localStorage.removeItem("token");
+          console.log(err);
+        });
+    }
+  }, [token]);
+
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <ReligionContextProvider>
