@@ -2,21 +2,14 @@ import React, { useContext } from "react";
 import { HomeContainer, HomeItem } from "./Home.styles";
 import PostItem from "../../components/PostItem/PostItem";
 import { ReligionContext } from "../../contexts/ReligionContext";
+import {useGetAnnouncements} from "../../hooks/useAnnouncement";
 
 function Home() {
   const { religion } = useContext(ReligionContext);
   const userId = "1";
   const role = "user";
-  const announcements = [
-    {
-      title: "ประกาศปิดปรับปรุงระบบ",
-      description: "ประกาศปิดปรับปรุงระบบ วันที่ 12 กันยายน 2563",
-    },
-    {
-      title: "ประกาศปิดปรับปรุงระบบ",
-      description: "ประกาศปิดปรับปรุงระบบ วันที่ 15 กันยายน 2563",
-    },
-  ];
+  const {data:announcements, isLoading, isSuccess, isError}=useGetAnnouncements();
+
   const posts = [
     {
       id: "1",
@@ -60,7 +53,7 @@ function Home() {
       <HomeItem>
         <div className="item-header">Announcement</div>
         <div className="item-content">
-          {announcements.map((announcement, index) => {
+          {announcements?.map((announcement, index) => {
             return (
               <div key={index}>
                 <PostItem

@@ -3,7 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 
 export const useGetAnnouncements = () => {
   return useQuery("announcements", async () => {
-    const { data } = await httpClient.get("announcements");
+    const { data } = await httpClient.get("Announcement/GetAllAnnouncement");
     return data;
   });
 };
@@ -12,7 +12,8 @@ export const useAddAnnouncement = () => {
   const queryClient = useQueryClient();
   return useMutation(
     async (announcement) => {
-      const { data } = await httpClient.post("announcements", announcement);
+      console.log(announcement);
+      const { data } = await httpClient.post("Announcement/CreateOneAnnouncement", announcement);
       return data;
     },
     {

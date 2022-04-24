@@ -1,19 +1,26 @@
-import React, { useState } from "react";
+import React, { useState,useEffect,useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import {useAddAnnouncement} from "../../hooks/useAnnouncement";
+import { UserContext } from "../../contexts/UserContext";
 
 function CreateAnnounce() {
+  const { user} = useContext(UserContext);
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
+  const { mutate, isLoading, isSuccess, isError } = useAddAnnouncement();
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(title, description);
-    navigate("/");
+    mutate({ adminId:user.id,title, description });
   };
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/");
+    }
+  }, [isSuccess, navigate]);
   return (
     <div>
-      <div style={{ fontSize: "35px", fontWeight: "bold" }}>สร้างประกาศ</div>
+      <div style={{ fontSize: "35px", fontWeight: "bold" }}>สร้างประกาศ{isError&&<p>error</p>}</div>
       <hr />
       <form onSubmit={onSubmit}>
         <div
@@ -70,8 +77,8 @@ function CreateAnnounce() {
           className="container"
           style={{ borderRadius: "10px", marginTop: "10px" }}
         >
-          <button type="submit" className="btn btn-success mb-2">
-            สร้างประกาศ
+          <button type="submit" className="btn btn-success mb-2" >
+            {isLoading?"กำลังสร้างประกาศ..." : "สร้างประกาศ"}
           </button>
         </div>
       </form>
