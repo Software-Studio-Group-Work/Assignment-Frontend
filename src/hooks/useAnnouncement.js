@@ -8,12 +8,24 @@ export const useGetAnnouncements = () => {
   });
 };
 
+export const useGetAnnouncement = (id) => {
+  return useQuery(["announcement", id], async () => {
+    const { data } = await httpClient.get(
+      `Announcement/GetOneAnnouncement/${id}`
+    );
+    console.log(data);
+    return data;
+  });
+};
+
 export const useAddAnnouncement = () => {
   const queryClient = useQueryClient();
   return useMutation(
     async (announcement) => {
-      console.log(announcement);
-      const { data } = await httpClient.post("Announcement/CreateOneAnnouncement", announcement);
+      const { data } = await httpClient.post(
+        "Announcement/CreateOneAnnouncement",
+        announcement
+      );
       return data;
     },
     {
@@ -29,7 +41,7 @@ export const useUpdateAnnouncement = () => {
   return useMutation(
     async (announcement) => {
       const { data } = await httpClient.put(
-        `announcements/${announcement.id}`,
+        `Announcement/UpdateOneAnnouncement/${announcement.id}`,
         announcement
       );
       return data;
@@ -46,7 +58,7 @@ export const useDeleteAnnouncement = () => {
   const queryClient = useQueryClient();
   return useMutation(
     async (id) => {
-      await httpClient.delete(`announcements/${id}`);
+      await httpClient.delete(`Announcement/DeleteOneAnnouncement/${id}`);
     },
     {
       onSuccess: () => {

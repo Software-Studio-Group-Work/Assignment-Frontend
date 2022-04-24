@@ -2,13 +2,23 @@ import React, { useContext } from "react";
 import { HomeContainer, HomeItem } from "./Home.styles";
 import PostItem from "../../components/PostItem/PostItem";
 import { ReligionContext } from "../../contexts/ReligionContext";
-import {useGetAnnouncements} from "../../hooks/useAnnouncement";
+import {
+  useGetAnnouncements,
+  useDeleteAnnouncement,
+} from "../../hooks/useAnnouncement";
 import { UserContext } from "../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
-  const { user} = useContext(UserContext);
+  const navigate = useNavigate();
+  const { user } = useContext(UserContext);
   const { religion } = useContext(ReligionContext);
-  const {data:announcements, isLoading, isSuccess, isError}=useGetAnnouncements();
+  const { data: announcements } = useGetAnnouncements();
+  const { mutate: deleteAnnouncement } = useDeleteAnnouncement();
+
+  const onAnnouncementDelete = (id) => {
+    deleteAnnouncement(id);
+  };
 
   const posts = [
     {
@@ -55,13 +65,15 @@ function Home() {
         <div className="item-content">
           {announcements?.map((announcement, index) => {
             return (
-              <div key={index}>
+              <div key={announcement.id}>
                 <PostItem
                   bg={index % 2 === 0 ? "#fff" : "#c4c4c4"}
                   item={announcement}
                   role={user?.role}
                   userId={user?.id}
                   type="announcement"
+                  onDelete={() => onAnnouncementDelete(announcement.id)}
+                  onEdit={() => navigate(`/edit-announce/${announcement.id}`)}
                 />
               </div>
             );
