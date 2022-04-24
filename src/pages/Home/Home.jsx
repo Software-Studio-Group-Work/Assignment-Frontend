@@ -3,11 +3,11 @@ import { HomeContainer, HomeItem } from "./Home.styles";
 import PostItem from "../../components/PostItem/PostItem";
 import { ReligionContext } from "../../contexts/ReligionContext";
 import {useGetAnnouncements} from "../../hooks/useAnnouncement";
+import { UserContext } from "../../contexts/UserContext";
 
 function Home() {
+  const { user} = useContext(UserContext);
   const { religion } = useContext(ReligionContext);
-  const userId = "1";
-  const role = "user";
   const {data:announcements, isLoading, isSuccess, isError}=useGetAnnouncements();
 
   const posts = [
@@ -59,8 +59,8 @@ function Home() {
                 <PostItem
                   bg={index % 2 === 0 ? "#fff" : "#c4c4c4"}
                   item={announcement}
-                  role={role}
-                  userId={userId}
+                  role={user?.role}
+                  userId={user?.id}
                   type="announcement"
                 />
               </div>
@@ -77,8 +77,8 @@ function Home() {
                 <PostItem
                   bg={index % 2 === 0 ? "#fff" : "#c4c4c4"}
                   item={post}
-                  role={role}
-                  userId={userId}
+                  role={user?.role}
+                  userId={user?.id}
                   type="post"
                 />
               </div>
