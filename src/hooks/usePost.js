@@ -17,26 +17,44 @@ export const useGetPost = (id) => {
 
 export const useAddPost = () => {
   const queryClient = useQueryClient();
-  return useMutation(async (post) => {
-    const { data } = await httpClient.post("posts", post);
-    queryClient.invalidateQueries("posts");
-    return data;
-  });
+  return useMutation(
+    async (post) => {
+      const { data } = await httpClient.post("posts", post);
+      return data;
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("posts");
+      },
+    }
+  );
 };
 
 export const useUpdatePost = () => {
   const queryClient = useQueryClient();
-  return useMutation(async (post) => {
-    const { data } = await httpClient.put(`posts/${post.id}`, post);
-    queryClient.invalidateQueries("posts");
-    return data;
-  });
+  return useMutation(
+    async (post) => {
+      const { data } = await httpClient.put(`posts/${post.id}`, post);
+      return data;
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("posts");
+      },
+    }
+  );
 };
 
 export const useDeletePost = () => {
   const queryClient = useQueryClient();
-  return useMutation(async (id) => {
-    await httpClient.delete(`posts/${id}`);
-    queryClient.invalidateQueries("posts");
-  });
+  return useMutation(
+    async (id) => {
+      await httpClient.delete(`posts/${id}`);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("posts");
+      },
+    }
+  );
 };
