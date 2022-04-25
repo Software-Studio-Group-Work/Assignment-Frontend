@@ -157,7 +157,7 @@ function Post() {
         </Header>
         {data?.picture && <img alt="post" src={data?.picture} />}
 
-        <p>{data?.description}</p>
+        <p style={{ whiteSpace: "pre-line" }}>{data?.description}</p>
         <FooterItem>
           <AiFillLike onClick={onLikePost} color={isLike ? "#000" : "#fff"} />
           <span>{likes?.length}</span>
