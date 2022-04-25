@@ -52,7 +52,8 @@ export const useDeletePlace = () => {
   const queryClient = useQueryClient();
   return useMutation(
     async (id) => {
-      await httpClient.delete(`Place/DeleteOnePlace/${id}`);
+      const { data } = await httpClient.delete(`Place/DeleteOnePlace/${id}`);
+      return data;
     },
     {
       onSuccess: () => {

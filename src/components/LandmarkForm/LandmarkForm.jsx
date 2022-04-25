@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 import { useAddPlace, useUpdatePlace } from "../../hooks/usePlace";
 import { Form } from "react-bootstrap";
+import { ImageToBase64 } from "../../hooks/useImage";
+import "./LandmarkForm.css";
 function LandmarkForm({ type, data }) {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
@@ -12,8 +14,16 @@ function LandmarkForm({ type, data }) {
   const [picture, setPicture] = useState(data?.picture || "");
   const [religion, setReligion] = useState(data?.religion || "");
 
-  const { mutate: addPlace, isSuccess: isAddSuccess } = useAddPlace();
-  const { mutate: updatePlace, isSuccess: isUpdateSuccess } = useUpdatePlace();
+  const {
+    mutate: addPlace,
+    isSuccess: isAddSuccess,
+    isLoading: isAddLoading,
+  } = useAddPlace();
+  const {
+    mutate: updatePlace,
+    isSuccess: isUpdateSuccess,
+    isLoading: isUpdateLoading,
+  } = useUpdatePlace();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -39,6 +49,12 @@ function LandmarkForm({ type, data }) {
     }
   };
 
+  const uploadImage = async (e) => {
+    const image = e.target.files[0];
+    const base64 = await ImageToBase64(image);
+    setPicture(base64);
+  };
+
   useEffect(() => {
     if (isUpdateSuccess) {
       navigate("/landmarks");
@@ -47,7 +63,7 @@ function LandmarkForm({ type, data }) {
     }
   }, [isUpdateSuccess, isAddSuccess, navigate]);
   return (
-    <div>
+    <div className="landmark-form">
       <hr />
       <form onSubmit={onSubmit}>
         <div
@@ -131,12 +147,12 @@ function LandmarkForm({ type, data }) {
                 <label>
                   <strong>รูปภาพ</strong>
                 </label>
+                {picture && <img alt="place" src={picture} />}
                 <input
                   type="file"
                   className="form-control"
                   style={{ border: "none" }}
-                  value={picture}
-                  onChange={(e) => setPicture(e.target.value)}
+                  onChange={uploadImage}
                 ></input>
               </div>
             </div>
@@ -199,7 +215,9 @@ function LandmarkForm({ type, data }) {
           style={{ borderRadius: "10px", marginTop: "10px" }}
         >
           <button type="submit" className="btn btn-success mb-2">
+            {(isUpdateLoading || isAddLoading) && "กำลัง"}
             {type === "create" ? "เพิ่มสถานที่สำคัญ" : "แก้ไขสถานที่สำคัญ"}
+            {(isUpdateLoading || isAddLoading) && "..."}
           </button>
         </div>
       </form>

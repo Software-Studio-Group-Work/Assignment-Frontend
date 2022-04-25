@@ -4,7 +4,7 @@ import "./User.css";
 import { useParams, useNavigate } from "react-router-dom";
 import { useGetUser, useUpdateUser, useDeleteUser } from "../../hooks/useUser";
 import { UserContext } from "../../contexts/UserContext";
-
+import { ImageToBase64 } from "../../hooks/useImage";
 function User() {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -64,6 +64,12 @@ function User() {
     }
   };
 
+  const uploadImage = async (e) => {
+    const image = e.target.files[0];
+    const base64 = await ImageToBase64(image);
+    setPicture(base64);
+  };
+
   if (data?.isBan && user?.role !== "admin") {
     return <h1>ถูกระงับการใช้งาน</h1>;
   }
@@ -77,11 +83,16 @@ function User() {
   return (
     <div id="user">
       <div id="upload">
-        <div id="circle"></div>
+        {picture ? (
+          <img className="circle" alt="profile" src={picture} />
+        ) : (
+          <div className="circle"></div>
+        )}
+
         {isEdit && (
           <div id="upload-image">
             <Form.Group controlId="formFileSm" className="mb-3">
-              <Form.Control type="file" size="sm" />
+              <Form.Control type="file" size="sm" onChange={uploadImage} />
             </Form.Group>
           </div>
         )}
