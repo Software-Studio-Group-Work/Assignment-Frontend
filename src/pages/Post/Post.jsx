@@ -27,17 +27,19 @@ import {
   useDeleteLikePost,
 } from "../../hooks/useLikePost";
 import CommentItem from "../../components/CommentItem/CommentItem";
+import { ReligionContext } from "../../contexts/ReligionContext";
 function Post() {
   const navigate = useNavigate();
   const [comment, setComment] = useState("");
   const [commentEdit, setCommentEdit] = useState(null);
   const { user } = useContext(UserContext);
+  const { religion } = useContext(ReligionContext);
   const { id } = useParams();
   const { data, isLoading, isError } = useGetPost(id);
   const { data: comments } = useGetCommentsByPostId(id);
   const { data: likes } = useGetLikesPost(id);
-  const { mutate: deletePost } = useDeletePost();
-  const { mutate: updatePost } = useUpdatePost();
+  const { mutate: deletePost } = useDeletePost(religion);
+  const { mutate: updatePost } = useUpdatePost(religion);
   const { mutate: addComment } = useAddComment();
   const { mutate: updateComment } = useUpdateComment();
   const { mutate: deleteComment } = useDeleteComment();
@@ -59,8 +61,8 @@ function Post() {
 
   const onDelete = () => {
     if (window.confirm("คุณต้องการลบกระทู้นี้หรือไม่?")) {
-      deletePost(id);
-      navigate("/");
+      deletePost(data);
+      window.location = "/";
     }
   };
 
@@ -69,7 +71,7 @@ function Post() {
       let newItem = { ...data };
       newItem.isHide = true;
       updatePost(newItem);
-      navigate("/");
+      window.location.reload();
     }
   };
 

@@ -17,9 +17,9 @@ function MyFeed() {
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error...</div>;
 
-  const onPostDelete = (id) => {
+  const onPostDelete = (post) => {
     if (window.confirm("คุณต้องการลบกระทู้นี้หรือไม่?")) {
-      deletePost(id);
+      deletePost(post);
     }
   };
 
@@ -68,7 +68,7 @@ function MyFeed() {
                     role={user?.role}
                     userId={user?.id}
                     type="post"
-                    onDelete={() => onPostDelete(post.id)}
+                    onDelete={() => onPostDelete(post)}
                     onHide={() => onHide(post)}
                     onEdit={() => navigate(`/edit-post/${post.id}`)}
                   />
@@ -104,7 +104,7 @@ function MyFeed() {
                     role={user?.role}
                     userId={user?.id}
                     type="post"
-                    onDelete={() => onPostDelete(post.id)}
+                    onDelete={() => onPostDelete(post)}
                     onShow={() => onShow(post)}
                     onEdit={() => navigate(`/edit-post/${post.id}`)}
                   />
