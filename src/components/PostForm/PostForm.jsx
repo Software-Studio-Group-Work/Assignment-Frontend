@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useAddPost, useUpdatePost } from "../../hooks/usePost";
 import { UserContext } from "../../contexts/UserContext";
 import { Form } from "react-bootstrap";
+import { ImageToBase64 } from "../../hooks/useImage";
+import "./PostForm.css";
 function PostForm({ type, data }) {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
@@ -10,8 +12,17 @@ function PostForm({ type, data }) {
   const [description, setDescription] = useState(data?.description || "");
   const [picture, setPicture] = useState(data?.picture || "");
   const [religion, setReligion] = useState(data?.religion || "");
-  const { mutate: addPost, data: post, isSuccess: isAddSuccess } = useAddPost();
-  const { mutate: updatePost, isSuccess: isUpdateSuccess } = useUpdatePost();
+  const {
+    mutate: addPost,
+    data: post,
+    isSuccess: isAddSuccess,
+    isLoading: isAddLoading,
+  } = useAddPost();
+  const {
+    mutate: updatePost,
+    isSuccess: isUpdateSuccess,
+    isLoading: isUpdateLoading,
+  } = useUpdatePost();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -29,6 +40,12 @@ function PostForm({ type, data }) {
     }
   };
 
+  const uploadImage = async (e) => {
+    const image = e.target.files[0];
+    const base64 = await ImageToBase64(image);
+    setPicture(base64);
+  };
+
   useEffect(() => {
     if (isUpdateSuccess) {
       navigate(`/post/${data?.id}`);
@@ -38,7 +55,7 @@ function PostForm({ type, data }) {
   }, [isUpdateSuccess, isAddSuccess, navigate, post, data]);
 
   return (
-    <div>
+    <div className="post-form">
       <hr />
       <form onSubmit={onSubmit}>
         <div
@@ -80,12 +97,12 @@ function PostForm({ type, data }) {
                 <label>
                   <strong>รูปภาพ</strong>
                 </label>
+                {picture && <img alt="post" src={picture} />}
                 <input
                   type="file"
                   className="form-control"
                   style={{ border: "none" }}
-                  value={picture}
-                  onChange={(e) => setPicture(e.target.value)}
+                  onChange={uploadImage}
                 ></input>
               </div>
             </div>
@@ -168,7 +185,9 @@ function PostForm({ type, data }) {
         <div style={{ borderRadius: "10px", marginTop: "10px" }}>
           <div className="container form-group">
             <button type="submit" className="btn btn-success mb-2">
+              {(isUpdateLoading || isAddLoading) && "กำลัง"}
               {type === "create" ? "สร้างกระทู้ธรรม" : "แก้ไขกระทู้ธรรม"}
+              {(isUpdateLoading || isAddLoading) && "..."}
             </button>
           </div>
         </div>

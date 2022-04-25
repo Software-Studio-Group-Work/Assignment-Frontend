@@ -5,7 +5,7 @@ const httpClient = axios.create({
   headers: {
     Authorization: "Bearer " + localStorage.getItem("token"),
   },
-  timeout: 5000,
+  timeout: 20000,
 });
 
 export default httpClient;

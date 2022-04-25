@@ -9,7 +9,11 @@ function Landmarks() {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
   const { data: places, isLoading, isError } = useGetPlaces();
-  const { mutate: deletePlace, isSuccess: isDeleteSuccess } = useDeletePlace();
+  const {
+    mutate: deletePlace,
+    isSuccess: isDeleteSuccess,
+    isLoading: isDeleteLoading,
+  } = useDeletePlace();
 
   const onDelete = (id) => {
     if (window.confirm("คุณต้องการลบสถานที่นี้หรือไม่?")) {
@@ -27,7 +31,7 @@ function Landmarks() {
   if (isError) return <div>Error...</div>;
 
   return (
-    <div>
+    <div className="landmark">
       <div id="title-service">
         สถานที่สำคัญทางศาสนา
         <hr></hr>
@@ -36,13 +40,14 @@ function Landmarks() {
         {places.map((place, index) => {
           return (
             <Card key={index} className="card-service">
-              <Card.Img
-                variant="top"
-                src="https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg"
-              />
+              <a href={place.link} target="_blank" rel="noreferrer">
+                <Card.Img variant="top" src={place.picture} />
+              </a>
               <Card.Body>
                 <Card.Title>{place.title}</Card.Title>
-                <Card.Text>{place.description}</Card.Text>
+                <Card.Text>
+                  {isDeleteLoading ? "กำลังลบ..." : place.description}
+                </Card.Text>
                 {user?.role === "admin" && (
                   <div className="place-icons">
                     <AiFillEdit
