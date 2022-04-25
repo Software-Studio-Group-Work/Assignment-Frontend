@@ -30,9 +30,9 @@ function Home() {
     }
   };
 
-  const onPostDelete = (id) => {
+  const onPostDelete = (post) => {
     if (window.confirm("คุณต้องการลบกระทู้นี้หรือไม่?")) {
-      deletePost(id);
+      deletePost(post);
     }
   };
 
@@ -100,7 +100,7 @@ function Home() {
                     role={user?.role}
                     userId={user?.id}
                     type="post"
-                    onDelete={() => onPostDelete(post.id)}
+                    onDelete={() => onPostDelete(post)}
                     onEdit={() => navigate(`/edit-post/${post.id}`)}
                     onHide={() => onHide(post)}
                   />

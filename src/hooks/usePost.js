@@ -36,6 +36,10 @@ export const useAddPost = () => {
   return useMutation(
     async (post) => {
       const { data } = await httpClient.post("Post/CreateOnePost", post);
+      if (data) {
+        queryClient.invalidateQueries(["posts", post.religion]);
+        queryClient.invalidateQueries(["posts", post.userId]);
+      }
       return data;
     },
     {
@@ -56,6 +60,8 @@ export const useUpdatePost = () => {
       );
       if (data) {
         queryClient.invalidateQueries(["post", post.id]);
+        queryClient.invalidateQueries(["posts", post.religion]);
+        queryClient.invalidateQueries(["posts", post.userId]);
       }
       return data;
     },
@@ -70,8 +76,13 @@ export const useUpdatePost = () => {
 export const useDeletePost = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async (id) => {
-      await httpClient.delete(`Post/DeleteOnePost/${id}`);
+    async (post) => {
+      const { data } = await httpClient.delete(`Post/DeleteOnePost/${post.id}`);
+      if (data) {
+        queryClient.invalidateQueries(["posts", post.religion]);
+        queryClient.invalidateQueries(["posts", post.userId]);
+      }
+      return data;
     },
     {
       onSuccess: () => {
