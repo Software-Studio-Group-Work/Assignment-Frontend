@@ -13,7 +13,7 @@ import {
   MdOutlinePlace,
 } from "react-icons/md";
 import { FaLandmark } from "react-icons/fa";
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiMenu, FiX, FiUser } from "react-icons/fi";
 import "./SideBar.css";
 
 function SideBar({ isAuth, role }) {
@@ -63,6 +63,14 @@ function SideBar({ isAuth, role }) {
                   </SideLink>
                 </SideList>
               </>
+            )}
+            {isAuth && (
+              <SideList onClick={handleMenuClick}>
+                <SideLink to="/user">
+                  <FiUser />
+                  <span>My Profile</span>
+                </SideLink>
+              </SideList>
             )}
           </SideMenu>
         </SideBarContainer>
