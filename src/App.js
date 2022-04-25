@@ -55,7 +55,7 @@ function App() {
                 <Route path="/create-post" element={<CreatePost />} />
                 <Route path="/edit-post/:id" element={<EditPost />} />
                 <Route path="/post/:id" element={<Post />} />
-                <Route path="/user" element={<User />} />
+                <Route path="/user/:id" element={<User />} />
                 <Route path="/myfeed" element={<MyFeed />} />
                 <Route path="/landmarks" element={<Landmarks />} />
                 <Route path="/create-landmark" element={<CreateLandmark />} />
