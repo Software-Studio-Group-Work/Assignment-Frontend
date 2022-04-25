@@ -28,7 +28,6 @@ function User() {
   useEffect(() => {
     if (isUpdateSuccess) {
       setIsEdit(false);
-      window.location.reload(false);
     }
   }, [isUpdateSuccess]);
 

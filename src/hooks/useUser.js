@@ -18,20 +18,16 @@ export const useGetUser = (id) => {
 
 export const useUpdateUser = () => {
   const queryClient = useQueryClient();
-  return useMutation(
-    async (user) => {
-      const { data } = await httpClient.put(
-        `User/UpdateOneUser/${user.id}`,
-        user
-      );
-      return data;
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("users");
-      },
+  return useMutation(async (user) => {
+    const { data } = await httpClient.put(
+      `User/UpdateOneUser/${user.id}`,
+      user
+    );
+    if (data) {
+      queryClient.invalidateQueries(["user", user.id]);
     }
-  );
+    return data;
+  });
 };
 
 export const useDeleteUser = () => {

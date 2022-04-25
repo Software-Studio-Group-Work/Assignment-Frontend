@@ -5,10 +5,8 @@ import {
   NavMenu,
   NavList,
   NavLink,
-  NavSearch,
   NavDropdown,
 } from "./NavBar.styles";
-import { AiOutlineSearch } from "react-icons/ai";
 import { Dropdown, Button } from "react-bootstrap";
 import { ReligionContext } from "../../contexts/ReligionContext";
 import { UserContext } from "../../contexts/UserContext";
@@ -37,10 +35,6 @@ function NavBar({ isAuth }) {
         <FaDharmachakra />
         <span>รอบรู้โลกธรรมะ</span>
       </NavLogo>
-      <NavSearch>
-        <input type="text" />
-        <AiOutlineSearch size={20} />
-      </NavSearch>
 
       {!isAuth ? (
         <NavMenu>
