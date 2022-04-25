@@ -21,8 +21,8 @@ function Home() {
   const { data: announcements } = useGetAnnouncements();
   const { mutate: deleteAnnouncement } = useDeleteAnnouncement();
   const { data: posts } = useGetPostsByReligion(religion);
-  const { mutate: deletePost } = useDeletePost();
-  const { mutate: updatePost } = useUpdatePost();
+  const { mutate: deletePost } = useDeletePost(religion);
+  const { mutate: updatePost } = useUpdatePost(religion);
 
   const onAnnouncementDelete = (id) => {
     if (window.confirm("คุณต้องการลบประกาศนี้หรือไม่?")) {
