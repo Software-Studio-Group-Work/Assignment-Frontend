@@ -62,7 +62,7 @@ function Post() {
   const onDelete = () => {
     if (window.confirm("คุณต้องการลบกระทู้นี้หรือไม่?")) {
       deletePost(data);
-      window.location = "/";
+      navigate("/");
     }
   };
 
@@ -71,7 +71,6 @@ function Post() {
       let newItem = { ...data };
       newItem.isHide = true;
       updatePost(newItem);
-      window.location.reload();
     }
   };
 
