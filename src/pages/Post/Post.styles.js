@@ -78,3 +78,18 @@ export const Header = styled.div`
     }
   }
 `;
+
+export const CommentForm = styled.form`
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 15px;
+
+  button {
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 150px;
+  }
+`;
