@@ -1,20 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-
-function PostForm({ type }) {
+import { useAddPost, useUpdatePost } from "../../hooks/usePost";
+import { UserContext } from "../../contexts/UserContext";
+import { Form } from "react-bootstrap";
+function PostForm({ type, data }) {
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [image, setImage] = useState("");
+  const [title, setTitle] = useState(data?.title || "");
+  const [description, setDescription] = useState(data?.description || "");
+  const [picture, setPicture] = useState(data?.picture || "");
+  const [religion, setReligion] = useState(data?.religion || "");
+  const { mutate: addPost, data: post, isSuccess: isAddSuccess } = useAddPost();
+  const { mutate: updatePost, isSuccess: isUpdateSuccess } = useUpdatePost();
 
   const onSubmit = (e) => {
     e.preventDefault();
     if (type === "create") {
-      navigate("/");
+      addPost({ userId: user.id, title, description, picture, religion });
     } else if (type === "edit") {
-      navigate("/");
+      updatePost({
+        id: data?.id,
+        userId: user.id,
+        title,
+        description,
+        picture,
+        religion,
+      });
     }
   };
+
+  useEffect(() => {
+    if (isUpdateSuccess) {
+      navigate(`/post/${data?.id}`);
+    } else if (isAddSuccess) {
+      navigate(`/post/${post.id}`);
+    }
+  }, [isUpdateSuccess, isAddSuccess, navigate, post, data]);
 
   return (
     <div>
@@ -43,6 +64,7 @@ function PostForm({ type }) {
                   style={{ backgroundColor: "#c4c4c4" }}
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
+                  required
                 ></input>
               </div>
             </div>
@@ -62,8 +84,8 @@ function PostForm({ type }) {
                   type="file"
                   className="form-control"
                   style={{ border: "none" }}
-                  value={image}
-                  onChange={(e) => setImage(e.target.value)}
+                  value={picture}
+                  onChange={(e) => setPicture(e.target.value)}
                 ></input>
               </div>
             </div>
@@ -89,19 +111,66 @@ function PostForm({ type }) {
                 ></textarea>
               </div>
             </div>
+
+            <div
+              className="container card"
+              style={{ borderRadius: "10px", marginTop: "10px" }}
+            >
+              <div className="container form-group">
+                <label style={{ marginTop: "10px" }}>
+                  <strong>ศาสนา</strong>
+                </label>
+                {["radio"].map((type) => (
+                  <div key={`inline-${type}`} className="mb-3">
+                    <Form.Check
+                      inline
+                      label="พุทธ"
+                      name="group1"
+                      type={type}
+                      id={`inline-${type}-1`}
+                      onChange={() => setReligion("buddhist")}
+                      checked={religion === "buddhist"}
+                      required
+                    />
+                    <Form.Check
+                      inline
+                      label="อิสลาม"
+                      name="group1"
+                      type={type}
+                      id={`inline-${type}-2`}
+                      onChange={() => setReligion("islam")}
+                      checked={religion === "islam"}
+                    />
+                    <Form.Check
+                      inline
+                      label="คริสต์"
+                      name="group1"
+                      type={type}
+                      id={`inline-${type}-3`}
+                      onChange={() => setReligion("christ")}
+                      checked={religion === "christ"}
+                    />
+                    <Form.Check
+                      inline
+                      label="อื่นๆ"
+                      name="group1"
+                      type={type}
+                      id={`inline-${type}-4`}
+                      onChange={() => setReligion("other")}
+                      checked={religion === "other"}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-        <div
-          className="container"
-          style={{
-            borderRadius: "10px",
-            marginTop: "10px",
-            marginLeft: "30px",
-          }}
-        >
-          <button type="submit" className="btn btn-success mb-2">
-            สร้างกระทู้
-          </button>
+        <div style={{ borderRadius: "10px", marginTop: "10px" }}>
+          <div className="container form-group">
+            <button type="submit" className="btn btn-success mb-2">
+              {type === "create" ? "สร้างกระทู้ธรรม" : "แก้ไขกระทู้ธรรม"}
+            </button>
+          </div>
         </div>
       </form>
     </div>

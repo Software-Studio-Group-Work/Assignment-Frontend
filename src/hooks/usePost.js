@@ -3,14 +3,30 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 
 export const useGetPosts = () => {
   return useQuery("posts", async () => {
-    const { data } = await httpClient.get("posts");
+    const { data } = await httpClient.get("Post/GetAllPost");
+    return data;
+  });
+};
+
+export const useGetPostsByUser = (userId) => {
+  return useQuery(["posts", userId], async () => {
+    const { data } = await httpClient.get(`Post/GetPostsByUser/${userId}`);
+    return data;
+  });
+};
+
+export const useGetPostsByReligion = (religion) => {
+  return useQuery(["posts", religion], async () => {
+    const { data } = await httpClient.get(
+      `Post/GetPostsByReligion/${religion}`
+    );
     return data;
   });
 };
 
 export const useGetPost = (id) => {
   return useQuery(["post", id], async () => {
-    const { data } = await httpClient.get(`posts/${id}`);
+    const { data } = await httpClient.get(`Post/GetOnePost/${id}`);
     return data;
   });
 };
@@ -19,7 +35,7 @@ export const useAddPost = () => {
   const queryClient = useQueryClient();
   return useMutation(
     async (post) => {
-      const { data } = await httpClient.post("posts", post);
+      const { data } = await httpClient.post("Post/CreateOnePost", post);
       return data;
     },
     {
@@ -34,7 +50,10 @@ export const useUpdatePost = () => {
   const queryClient = useQueryClient();
   return useMutation(
     async (post) => {
-      const { data } = await httpClient.put(`posts/${post.id}`, post);
+      const { data } = await httpClient.put(
+        `Post/UpdateOnePost/${post.id}`,
+        post
+      );
       return data;
     },
     {
@@ -49,7 +68,7 @@ export const useDeletePost = () => {
   const queryClient = useQueryClient();
   return useMutation(
     async (id) => {
-      await httpClient.delete(`posts/${id}`);
+      await httpClient.delete(`Post/DeleteOnePost/${id}`);
     },
     {
       onSuccess: () => {

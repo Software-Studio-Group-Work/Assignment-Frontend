@@ -25,6 +25,11 @@ function NavBar({ isAuth }) {
   const { religion, setReligion } = useContext(ReligionContext);
   const { setUser } = useContext(UserContext);
 
+  const onLogout = () => {
+    setUser(null);
+    localStorage.removeItem("token");
+  };
+
   return (
     <NavContainer>
       <NavLogo to="/">
@@ -96,7 +101,7 @@ function NavBar({ isAuth }) {
           </NavList>
           <NavList>
             <NavLink to="/login">
-              <Button variant="danger" onClick={() => setUser(null)}>
+              <Button variant="danger" onClick={onLogout}>
                 Logout
               </Button>
             </NavLink>

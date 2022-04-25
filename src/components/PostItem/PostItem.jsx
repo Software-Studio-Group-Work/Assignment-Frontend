@@ -3,9 +3,19 @@ import { PostItemContainer } from "./PostItem.styles";
 import { AiFillDelete } from "react-icons/ai";
 import { BiHide } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
-import { AiFillEdit } from "react-icons/ai";
+import { AiFillEdit, AiFillEye } from "react-icons/ai";
 
-function PostItem({ bg, item, role, userId, type, onDelete, onHide, onEdit }) {
+function PostItem({
+  bg,
+  item,
+  role,
+  userId,
+  type,
+  onDelete,
+  onHide,
+  onEdit,
+  onShow,
+}) {
   const navigate = useNavigate();
 
   return (
@@ -17,7 +27,7 @@ function PostItem({ bg, item, role, userId, type, onDelete, onHide, onEdit }) {
           <h5>{item?.title}</h5>
         )}
 
-        {userId && role === "admin" && (
+        {userId && role === "admin" && userId !== item.userId && (
           <div className="post-item-icons">
             {type === "announcement" && (
               <>
@@ -27,7 +37,12 @@ function PostItem({ bg, item, role, userId, type, onDelete, onHide, onEdit }) {
             )}
             {type === "post" && (
               <>
-                <BiHide onClick={onHide} />
+                {item.isHide ? (
+                  <AiFillEye onClick={onShow} />
+                ) : (
+                  <BiHide onClick={onHide} />
+                )}
+
                 <AiFillDelete onClick={onDelete} />
               </>
             )}
@@ -39,7 +54,11 @@ function PostItem({ bg, item, role, userId, type, onDelete, onHide, onEdit }) {
             {type === "post" && (
               <>
                 <AiFillEdit onClick={onEdit} />
-                <BiHide onClick={onHide} />
+                {item.isHide ? (
+                  <AiFillEye onClick={onShow} />
+                ) : (
+                  <BiHide onClick={onHide} />
+                )}
                 <AiFillDelete onClick={onDelete} />
               </>
             )}

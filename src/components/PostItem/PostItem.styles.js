@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const PostItemContainer = styled.div`
   background-color: ${(props) => props.bg};
   padding: 10px 15px;
+  height: 90px;
   .post-item-header {
     display: flex;
     justify-content: space-between;

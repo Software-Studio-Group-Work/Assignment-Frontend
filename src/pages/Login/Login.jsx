@@ -17,6 +17,7 @@ function Login() {
   useEffect(() => {
     if (isSuccess) {
       navigate("/");
+      window.location.reload(false);
     }
   }, [isSuccess, navigate]);
 
