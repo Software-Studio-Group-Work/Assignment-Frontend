@@ -162,7 +162,12 @@ function Post() {
           <AiFillLike onClick={onLikePost} color={isLike ? "#000" : "#fff"} />
           <span>{likes?.length}</span>
           <span>|</span>
-          <span>สมาชิกหมายเลข: {data?.userId}</span>
+          <span
+            className="user-id"
+            onClick={() => navigate(`/user/${data?.userId}`)}
+          >
+            สมาชิกหมายเลข: {data?.userId}
+          </span>
         </FooterItem>
       </PostItem>
       {comments?.map((comment) => (

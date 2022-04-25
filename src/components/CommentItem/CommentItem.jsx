@@ -6,16 +6,19 @@ import {
   useAddLikeComment,
   useDeleteLikeComment,
 } from "../../hooks/useLikeComment";
+import { useNavigate } from "react-router-dom";
+import "./CommentItem.css";
 
 function CommentItem({ comment, onDeleteComment, onEditClick, user }) {
-  const { data: likes } = useGetLikeComment(comment?.id);
+  const navigate = useNavigate();
+  const { data: likes } = useGetLikeComment(comment.id);
   const { mutate: addLikeComment } = useAddLikeComment();
   const { mutate: deleteLikeComment } = useDeleteLikeComment();
   const [isLike, setIsLike] = useState(false);
 
   useEffect(() => {
     if (likes) {
-      const like = likes.find((like) => like.userId === user.id);
+      const like = likes.find((like) => like.userId === user?.id);
       if (like) {
         setIsLike(true);
       } else {
@@ -30,18 +33,18 @@ function CommentItem({ comment, onDeleteComment, onEditClick, user }) {
     } else {
       if (!isLike) {
         addLikeComment({
-          commentId: comment?.id,
+          commentId: comment.id,
           userId: user.id,
         });
       } else {
-        let like = likes.find((like) => like.userId === user.id);
+        let like = likes.find((like) => like.userId === user?.id);
         deleteLikeComment(like);
       }
     }
   };
 
   return (
-    <CommentContainer key={comment.id}>
+    <CommentContainer>
       <Header>
         <p>{comment.comment}</p>
         {user && comment.userId !== user?.id && user?.role === "admin" && (
@@ -61,7 +64,12 @@ function CommentItem({ comment, onDeleteComment, onEditClick, user }) {
         <AiFillLike onClick={onLikeComment} color={isLike ? "#000" : "#fff"} />
         <span>{likes?.length}</span>
         <span>|</span>
-        <span>สมาชิกหมายเลข: {comment.userId}</span>
+        <span
+          className="user-id"
+          onClick={() => navigate(`/user/${comment.userId}`)}
+        >
+          สมาชิกหมายเลข: {comment.userId}
+        </span>
       </FooterItem>
     </CommentContainer>
   );

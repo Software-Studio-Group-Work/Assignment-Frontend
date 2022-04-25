@@ -41,6 +41,11 @@ export const FooterItem = styled.div`
   column-gap: 20px;
   align-items: center;
 
+  .user-id:hover {
+    cursor: pointer;
+    color: #000;
+  }
+
   svg {
     font-size: 1.2rem;
     cursor: pointer;
