@@ -4,7 +4,7 @@ import "./User.css";
 import { useParams, useNavigate } from "react-router-dom";
 import { useGetUser, useUpdateUser, useDeleteUser } from "../../hooks/useUser";
 import { UserContext } from "../../contexts/UserContext";
-import { ImageToBase64 } from "../../hooks/useImage";
+import { ImageToBase64, ResizeImage } from "../../hooks/useImage";
 function User() {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -67,7 +67,8 @@ function User() {
   const uploadImage = async (e) => {
     const image = e.target.files[0];
     const base64 = await ImageToBase64(image);
-    setPicture(base64);
+    const resized = await ResizeImage(base64, 300, 300);
+    setPicture(resized);
   };
 
   if (data?.isBan && user?.role !== "admin") {

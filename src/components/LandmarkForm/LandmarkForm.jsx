@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 import { useAddPlace, useUpdatePlace } from "../../hooks/usePlace";
 import { Form } from "react-bootstrap";
-import { ImageToBase64 } from "../../hooks/useImage";
+import { ImageToBase64, ResizeImage } from "../../hooks/useImage";
 import "./LandmarkForm.css";
 function LandmarkForm({ type, data }) {
   const { user } = useContext(UserContext);
@@ -52,7 +52,8 @@ function LandmarkForm({ type, data }) {
   const uploadImage = async (e) => {
     const image = e.target.files[0];
     const base64 = await ImageToBase64(image);
-    setPicture(base64);
+    const resized = await ResizeImage(base64, 300, 300);
+    setPicture(resized);
   };
 
   useEffect(() => {
