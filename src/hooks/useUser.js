@@ -1,25 +1,29 @@
 import httpClient from "../utils/httpClient";
 import { useQuery, useMutation, useQueryClient } from "react-query";
-
+import { UserContext } from "../contexts/UserContext";
+import { useContext } from "react";
 export const useGetUsers = () => {
   return useQuery("users", async () => {
-    const { data } = await httpClient.get("users");
+    const { data } = await httpClient.get("User/GetAllUser");
     return data;
   });
 };
 
 export const useGetUser = (id) => {
   return useQuery(["user", id], async () => {
-    const { data } = await httpClient.get(`users/${id}`);
+    const { data } = await httpClient.get(`User/GetOneUser/${id}`);
     return data;
   });
 };
 
-export const useUpdateUser = (id) => {
+export const useUpdateUser = () => {
   const queryClient = useQueryClient();
   return useMutation(
     async (user) => {
-      const { data } = await httpClient.put(`users/${id}`, user);
+      const { data } = await httpClient.put(
+        `User/UpdateOneUser/${user.id}`,
+        user
+      );
       return data;
     },
     {
@@ -30,15 +34,18 @@ export const useUpdateUser = (id) => {
   );
 };
 
-export const useDeleteUser = (id) => {
+export const useDeleteUser = () => {
+  const { setUser } = useContext(UserContext);
   const queryClient = useQueryClient();
   return useMutation(
-    async () => {
-      await httpClient.delete(`users/${id}`);
+    async (id) => {
+      await httpClient.delete(`User/DeleteOneUser/${id}`);
     },
     {
       onSuccess: () => {
         queryClient.invalidateQueries("users");
+        setUser(null);
+        localStorage.removeItem("token");
       },
     }
   );

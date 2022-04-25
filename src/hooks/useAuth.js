@@ -12,8 +12,12 @@ export const useLogin = () => {
     },
     {
       onSuccess: (data) => {
-        localStorage.setItem("token", data.token);
-        setUser(data.user.result);
+        if (data.user.result.isBan) {
+          alert("You are banned!");
+        } else {
+          localStorage.setItem("token", data.token);
+          setUser(data.user.result);
+        }
       },
     }
   );
