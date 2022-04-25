@@ -30,7 +30,6 @@ export const HomeItem = styled.div`
     flex-direction: column;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    background-color: #c4c4c4;
     padding-bottom: 10px;
   }
 `;

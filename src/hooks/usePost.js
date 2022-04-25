@@ -8,6 +8,22 @@ export const useGetPosts = () => {
   });
 };
 
+export const useGetPostsByUser = (userId) => {
+  return useQuery(["posts", userId], async () => {
+    const { data } = await httpClient.get(`Post/GetPostsByUser/${userId}`);
+    return data;
+  });
+};
+
+export const useGetPostsByReligion = (religion) => {
+  return useQuery(["posts", religion], async () => {
+    const { data } = await httpClient.get(
+      `Post/GetPostsByReligion/${religion}`
+    );
+    return data;
+  });
+};
+
 export const useGetPost = (id) => {
   return useQuery(["post", id], async () => {
     const { data } = await httpClient.get(`Post/GetOnePost/${id}`);
