@@ -14,6 +14,7 @@ import { ReligionContext } from "../../contexts/ReligionContext";
 import { UserContext } from "../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 import { FaDharmachakra } from "react-icons/fa";
+import { SiAddthis } from "react-icons/si";
 const religions = {
   buddhist: "พุทธ",
   islam: "อิสลาม",
@@ -44,7 +45,12 @@ function NavBar({ isAuth }) {
       {!isAuth ? (
         <NavMenu>
           <NavList>
-            <span onClick={() => navigate("/login")}>ตั้งกระทู้</span>
+            <span onClick={() => navigate("/login")}>
+              <NavLink to="/create-post">
+                <SiAddthis />
+                ตั้งกระทู้
+              </NavLink>
+            </span>
           </NavList>
           <NavList>
             ศาสนา
@@ -76,7 +82,10 @@ function NavBar({ isAuth }) {
       ) : (
         <NavMenu>
           <NavList>
-            <NavLink to="/create-post">ตั้งกระทู้</NavLink>
+            <NavLink to="/create-post">
+              <SiAddthis />
+              ตั้งกระทู้
+            </NavLink>
           </NavList>
           <NavList>
             ศาสนา

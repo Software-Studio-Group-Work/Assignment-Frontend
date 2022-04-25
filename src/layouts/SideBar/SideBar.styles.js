@@ -50,6 +50,10 @@ export const SideLink = styled(Link)`
     color: #000;
   }
 
+  &:hover {
+    color: #000;
+  }
+
   span {
     margin-left: 10px;
   }

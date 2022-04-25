@@ -82,6 +82,7 @@ export const NavLink = styled(Link)`
   display: flex;
   align-items: center;
   text-decoration: none;
+  column-gap: 5px;
   padding: 0 1rem;
   cursor: pointer;
 
@@ -94,6 +95,10 @@ export const NavLink = styled(Link)`
       background-color: #f8e076;
       color: #000;
     }
+  }
+
+  &:hover {
+    color: #000;
   }
 `;
 
