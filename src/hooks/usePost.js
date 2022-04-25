@@ -54,6 +54,9 @@ export const useUpdatePost = () => {
         `Post/UpdateOnePost/${post.id}`,
         post
       );
+      if (data) {
+        queryClient.invalidateQueries(["post", post.id]);
+      }
       return data;
     },
     {
