@@ -1,9 +1,8 @@
 import React from "react";
 import { PostItemContainer } from "./PostItem.styles";
-import { AiFillDelete } from "react-icons/ai";
+import { AiFillDelete, AiFillEdit, AiFillEye } from "react-icons/ai";
 import { BiHide } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
-import { AiFillEdit, AiFillEye } from "react-icons/ai";
 
 function PostItem({
   bg,

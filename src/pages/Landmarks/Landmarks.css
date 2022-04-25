@@ -4,13 +4,11 @@
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
+    column-gap: 20px;
+    row-gap: 20px;
 }
 
 .card-service{
-    margin-top:10px;
-    margin-bottom:10px;
-    margin-left:50px;
-    margin-right:50px;
     width: 25%;
 }
 
@@ -19,6 +17,20 @@
     font-size:35px;
     font-weight:bold;
 }
+
+.place-icons{
+    display:flex;
+    justify-content: flex-end;
+    column-gap: 14px;
+    font-size: 1.2rem;
+}
+
+.place-icons svg:hover{
+    color: #bca65e;
+    cursor: pointer;
+}
+
+
 
 .card-service:hover{
     transform: scale(1.05);

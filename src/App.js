@@ -17,6 +17,7 @@ import { ReligionContextProvider } from "./contexts/ReligionContext";
 import { useState, useEffect } from "react";
 import EditAnnounce from "./pages/EditAnnounce/EditAnnounce";
 import EditPost from "./pages/EditPost/EditPost";
+import EditLandmark from "./pages/EditLandmark/EditLandmark";
 import httpClient from "./utils/httpClient";
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
                 <Route path="/myfeed" element={<MyFeed />} />
                 <Route path="/landmarks" element={<Landmarks />} />
                 <Route path="/create-landmark" element={<CreateLandmark />} />
+                <Route path="/edit-landmark/:id" element={<EditLandmark />} />
               </Routes>
             </div>
           </div>
