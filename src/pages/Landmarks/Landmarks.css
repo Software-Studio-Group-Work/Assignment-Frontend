@@ -43,15 +43,27 @@
     
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1500px) {
     .card-service{
-        width: 30%;
+        width: 40%;
     }
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 1000px) {
     .card-service{
-        width: 70%;
+        width: 35%;
+    }
+}
+
+@media screen and (max-width: 820px) {
+    .card-service{
+        width: 60%;
+    }
+} 
+
+@media screen and (max-width: 520px) {
+    .card-service{
+        width: 80%;
     }
 } 
 
