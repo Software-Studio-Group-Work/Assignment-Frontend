@@ -32,18 +32,6 @@ export const PostItem = styled.div`
   }
 `;
 
-export const CommentItem = styled.div`
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  background-color: #c9bc8e;
-  border-radius: 10px;
-  padding: 15px;
-  p {
-    color: #fff;
-  }
-`;
-
 export const FooterItem = styled.div`
   color: #fff;
   position: relative;

@@ -3,37 +3,40 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 
 export const useGetLikeComment = (commentId) => {
   return useQuery(["likeComment", commentId], async () => {
-    const { data } = await httpClient.get(`likeComment?commentId=${commentId}`);
+    const { data } = await httpClient.get(
+      `LikeComment/GetLikesOnComment/${commentId}`
+    );
     return data;
   });
 };
 
-export const useAddLikeComment = (commentId) => {
+export const useAddLikeComment = () => {
   const queryClient = useQueryClient();
   return useMutation(
     async (like) => {
-      const { data } = await httpClient.post("likeComment", like);
+      const { data } = await httpClient.post(
+        "LikeComment/CreateOneLikeComment",
+        like
+      );
       return data;
     },
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["likeComment", commentId]);
+      onSuccess: (data) => {
+        queryClient.invalidateQueries(["likeComment", data.commentId]);
       },
     }
   );
 };
 
-export const useDeleteLikeComment = (id) => {
+export const useDeleteLikeComment = () => {
   const queryClient = useQueryClient();
-  return useMutation(
-    async () => {
-      const { data } = await httpClient.delete(`likeComment/${id}`);
-      return data;
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["likeComment", data.commentId]);
-      },
+  return useMutation(async (like) => {
+    const { data } = await httpClient.delete(
+      `LikeComment/DeleteOneLikeComment/${like.id}`
+    );
+    if (data) {
+      queryClient.invalidateQueries(["likeComment", like.commentId]);
     }
-  );
+    return data;
+  });
 };

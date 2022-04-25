@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import {
   PostContainer,
   PostItem,
-  CommentItem,
   FooterItem,
   Header,
   CommentForm,
@@ -27,6 +26,7 @@ import {
   useAddLikePost,
   useDeleteLikePost,
 } from "../../hooks/useLikePost";
+import CommentItem from "../../components/CommentItem/CommentItem";
 function Post() {
   const navigate = useNavigate();
   const [comment, setComment] = useState("");
@@ -48,7 +48,7 @@ function Post() {
 
   useEffect(() => {
     if (likes) {
-      const like = likes.find((like) => like.userId === user.id);
+      const like = likes.find((like) => like.userId === user?.id);
       if (like) {
         setIsLike(true);
       } else {
@@ -166,28 +166,13 @@ function Post() {
         </FooterItem>
       </PostItem>
       {comments?.map((comment) => (
-        <CommentItem key={comment.id}>
-          <Header>
-            <p>{comment.comment}</p>
-            {user && comment.userId !== user?.id && user?.role === "admin" && (
-              <div className="icons">
-                <AiFillDelete onClick={() => onDeleteComment(comment)} />
-              </div>
-            )}
-
-            {user && comment.userId === user?.id && (
-              <div className="icons">
-                <AiFillEdit onClick={() => onEditClick(comment)} />
-                <AiFillDelete onClick={() => onDeleteComment(comment)} />
-              </div>
-            )}
-          </Header>
-          <FooterItem>
-            <AiFillLike />
-            <span>|</span>
-            <span>สมาชิกหมายเลข: {comment.userId}</span>
-          </FooterItem>
-        </CommentItem>
+        <CommentItem
+          key={comment.id}
+          user={user}
+          comment={comment}
+          onEditClick={onEditClick}
+          onDeleteComment={onDeleteComment}
+        />
       ))}
 
       <CommentForm onSubmit={onSubmitComment}>
