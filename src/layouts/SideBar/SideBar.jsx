@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   SideBarContainer,
   SideMenu,
@@ -13,10 +13,12 @@ import {
   MdOutlinePlace,
 } from "react-icons/md";
 import { FaLandmark } from "react-icons/fa";
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiMenu, FiX, FiUser } from "react-icons/fi";
 import "./SideBar.css";
+import { UserContext } from "../../contexts/UserContext";
 
 function SideBar({ isAuth, role }) {
+  const { user } = useContext(UserContext);
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const handleMenuClick = () => setClick(false);
@@ -63,6 +65,14 @@ function SideBar({ isAuth, role }) {
                   </SideLink>
                 </SideList>
               </>
+            )}
+            {isAuth && (
+              <SideList onClick={handleMenuClick}>
+                <SideLink to={`/user/${user?.id}`}>
+                  <FiUser />
+                  <span>My Profile</span>
+                </SideLink>
+              </SideList>
             )}
           </SideMenu>
         </SideBarContainer>

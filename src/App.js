@@ -14,10 +14,30 @@ import Landmarks from "./pages/Landmarks/Landmarks";
 import CreateLandmark from "./pages/CreateLandmark/CreateLandmark";
 import { UserContext } from "./contexts/UserContext";
 import { ReligionContextProvider } from "./contexts/ReligionContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import EditAnnounce from "./pages/EditAnnounce/EditAnnounce";
+import EditPost from "./pages/EditPost/EditPost";
+import EditLandmark from "./pages/EditLandmark/EditLandmark";
+import httpClient from "./utils/httpClient";
 
 function App() {
+  const token = localStorage.getItem("token");
   const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    if (token) {
+      httpClient
+        .get(`User/GetUserByToken/${token}`)
+        .then((res) => {
+          setUser(res.data);
+        })
+        .catch((err) => {
+          localStorage.removeItem("token");
+          console.log(err);
+        });
+    }
+  }, [token]);
+
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <ReligionContextProvider>
@@ -28,15 +48,18 @@ function App() {
             <div className="content">
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/create-announce" element={<CreateAnnounce />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/user" element={<User />} />
+                <Route path="/create-announce" element={<CreateAnnounce />} />
+                <Route path="/edit-announce/:id" element={<EditAnnounce />} />
                 <Route path="/create-post" element={<CreatePost />} />
+                <Route path="/edit-post/:id" element={<EditPost />} />
                 <Route path="/post/:id" element={<Post />} />
+                <Route path="/user/:id" element={<User />} />
                 <Route path="/myfeed" element={<MyFeed />} />
                 <Route path="/landmarks" element={<Landmarks />} />
                 <Route path="/create-landmark" element={<CreateLandmark />} />
+                <Route path="/edit-landmark/:id" element={<EditLandmark />} />
               </Routes>
             </div>
           </div>

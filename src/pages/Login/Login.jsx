@@ -1,26 +1,33 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import { UserContext } from "../../contexts/UserContext";
+import { useLogin } from "../../hooks/useAuth";
 function Login() {
-  const navigate = useNavigate();
-  const { setUser } = useContext(UserContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { mutate, isLoading, isSuccess, isError } = useLogin();
+  const navigate = useNavigate();
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setUser({ username, role: "admin" });
-    navigate("/");
+    mutate({ username, password });
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      window.location = "/";
+    }
+  }, [isSuccess, navigate]);
 
   return (
     <div id="login">
       <Form onSubmit={onSubmit}>
         <Form.Group className="mb-3" id="login-form">
           <Form.Label id="title-login">ลงชื่อเข้าใช้งาน</Form.Label>
-          <br />
+          {isError && (
+            <p style={{ color: "red" }}>ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง</p>
+          )}
           <Form.Control
             type="email-user-id"
             placeholder="ชื่อผู้ใช้"
@@ -38,7 +45,7 @@ function Login() {
           />
         </Form.Group>
         <Button variant="primary" type="submit" id="button-login">
-          Login
+          {isLoading ? "กำลังเข้าสู่ระบบ..." : "เข้าสู่ระบบ"}
         </Button>
         <br />
         <Form.Label id="text-login">ยังไม่ได้เป็นสมาชิก</Form.Label>

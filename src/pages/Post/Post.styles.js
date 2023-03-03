@@ -32,18 +32,6 @@ export const PostItem = styled.div`
   }
 `;
 
-export const CommentItem = styled.div`
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  background-color: #c9bc8e;
-  border-radius: 10px;
-  padding: 15px;
-  p {
-    color: #fff;
-  }
-`;
-
 export const FooterItem = styled.div`
   color: #fff;
   position: relative;
@@ -52,6 +40,11 @@ export const FooterItem = styled.div`
   display: flex;
   column-gap: 20px;
   align-items: center;
+
+  .user-id:hover {
+    cursor: pointer;
+    color: #000;
+  }
 
   svg {
     font-size: 1.2rem;
@@ -76,5 +69,20 @@ export const Header = styled.div`
     svg:hover {
       color: #f8e076;
     }
+  }
+`;
+
+export const CommentForm = styled.form`
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 15px;
+
+  button {
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 150px;
   }
 `;

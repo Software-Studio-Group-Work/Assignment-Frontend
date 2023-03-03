@@ -5,15 +5,14 @@ import {
   NavMenu,
   NavList,
   NavLink,
-  NavSearch,
   NavDropdown,
 } from "./NavBar.styles";
-import { AiOutlineSearch } from "react-icons/ai";
 import { Dropdown, Button } from "react-bootstrap";
 import { ReligionContext } from "../../contexts/ReligionContext";
 import { UserContext } from "../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 import { FaDharmachakra } from "react-icons/fa";
+import { SiAddthis } from "react-icons/si";
 const religions = {
   buddhist: "พุทธ",
   islam: "อิสลาม",
@@ -25,21 +24,27 @@ function NavBar({ isAuth }) {
   const { religion, setReligion } = useContext(ReligionContext);
   const { setUser } = useContext(UserContext);
 
+  const onLogout = () => {
+    setUser(null);
+    localStorage.removeItem("token");
+  };
+
   return (
     <NavContainer>
       <NavLogo to="/">
         <FaDharmachakra />
         <span>รอบรู้โลกธรรมะ</span>
       </NavLogo>
-      <NavSearch>
-        <input type="text" />
-        <AiOutlineSearch size={20} />
-      </NavSearch>
 
       {!isAuth ? (
         <NavMenu>
           <NavList>
-            <span onClick={() => navigate("/login")}>ตั้งกระทู้</span>
+            <span onClick={() => navigate("/login")}>
+              <NavLink to="/create-post">
+                <SiAddthis />
+                ตั้งกระทู้
+              </NavLink>
+            </span>
           </NavList>
           <NavList>
             ศาสนา
@@ -71,7 +76,10 @@ function NavBar({ isAuth }) {
       ) : (
         <NavMenu>
           <NavList>
-            <NavLink to="/create-post">ตั้งกระทู้</NavLink>
+            <NavLink to="/create-post">
+              <SiAddthis />
+              ตั้งกระทู้
+            </NavLink>
           </NavList>
           <NavList>
             ศาสนา
@@ -96,7 +104,7 @@ function NavBar({ isAuth }) {
           </NavList>
           <NavList>
             <NavLink to="/login">
-              <Button variant="danger" onClick={() => setUser(null)}>
+              <Button variant="danger" onClick={onLogout}>
                 Logout
               </Button>
             </NavLink>

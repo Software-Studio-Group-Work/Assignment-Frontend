@@ -1,8 +1,16 @@
 #user {
   background: #ffffff;
   border-radius: 10px;
-  margin-top: 20px;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: 20%;
+  padding: 20px;
+  margin: 0 auto;
+  margin-top: 50px;
+  width: 90%;
+  
 }
 
 #input-user {
@@ -10,7 +18,6 @@
   border-radius: 5px;
   border-color: #c4c4c4;
   height: 25px;
-  width: 500px;
 }
 
 #text-user {
@@ -23,26 +30,15 @@
   font-size: 24px;
 }
 
-#button-user {
-  height: 35px;
-  width: 100px;
-  border-radius: 10px;
-  background: #bca65e;
-  margin: 10px;
-  font-weight: 700;
-  font-size: 18px;
-  color: #ffffff;
-  border-color: #bca65e;
-  margin-left: 400px;
-  display:flex;
-  align-items: center;
-  justify-content: center;
-}
-#circle {
+.button-user {
+  margin-right: 20px;
+} 
+.circle {
   width: 200px;
   height: 200px;
   background: #c4c4c4;
-  border-radius: 100%;
+  border-radius: 50%;
+  margin-bottom: 20px;
 }
 
 #text-upload {
@@ -68,13 +64,10 @@
 }
 
 #personal-user {
-  margin-top: 150px;
-  margin-left: 250px;
+  margin-top: 45px;
 }
 
 #upload {
-  margin-top: 55px;
-  margin-left: 50px;
   font-size: 12px;
 }
 

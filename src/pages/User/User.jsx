@@ -1,30 +1,116 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import "./User.css";
-
+import { useParams, useNavigate } from "react-router-dom";
+import { useGetUser, useUpdateUser, useDeleteUser } from "../../hooks/useUser";
+import { UserContext } from "../../contexts/UserContext";
+import { ImageToBase64, ResizeImage } from "../../hooks/useImage";
 function User() {
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const { user } = useContext(UserContext);
+  const { data, isLoading, isError } = useGetUser(id);
+  const [isEdit, setIsEdit] = useState(false);
+  const [name, setName] = useState("");
   const [religion, setReligion] = useState(null);
+  const [picture, setPicture] = useState("");
+  const { mutate: updateUser, isSuccess: isUpdateSuccess } = useUpdateUser();
+  const { mutate: deleteUser, isSuccess: isDeleteSuccess } = useDeleteUser();
+
+  useEffect(() => {
+    if (data) {
+      setName(data.name);
+      setReligion(data.religion);
+      setPicture(data.picture);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (isUpdateSuccess) {
+      setIsEdit(false);
+    }
+  }, [isUpdateSuccess]);
+
+  useEffect(() => {
+    if (isDeleteSuccess) {
+      navigate("/");
+    }
+  }, [isDeleteSuccess, navigate]);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (isEdit) {
+      updateUser({ ...user, religion, name, picture });
+    } else {
+      setIsEdit(true);
+    }
+  };
+
+  const onDeleteClick = () => {
+    if (window.confirm("คุณต้องการลบบัญชีนี้หรือไม่?")) {
+      deleteUser(data?.id);
+    }
+  };
+
+  const onBanClick = () => {
+    if (window.confirm("คุณต้องการระงับบัญชีนี้หรือไม่?")) {
+      updateUser({ ...data, isBan: true });
+    }
+  };
+
+  const onUnBanClick = () => {
+    if (window.confirm("คุณต้องการปลดระงับบัญชีนี้หรือไม่?")) {
+      updateUser({ ...data, isBan: false });
+    }
+  };
+
+  const uploadImage = async (e) => {
+    const image = e.target.files[0];
+    const base64 = await ImageToBase64(image);
+    const resized = await ResizeImage(base64, 300, 300);
+    setPicture(resized);
+  };
+
+  if (data?.isBan && user?.role !== "admin") {
+    return <h1>ถูกระงับการใช้งาน</h1>;
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (isError) {
+    return <div>Error...</div>;
+  }
   return (
     <div id="user">
       <div id="upload">
-        <div id="circle"></div>
-        <p id="text-upload">Upload a different photo...</p>
-        <div id="upload-image">
-          <Button variant="primary" type="submit" id="button-upload">
-            Choose file
-          </Button>
-        </div>
+        {picture ? (
+          <img className="circle" alt="profile" src={picture} />
+        ) : (
+          <div className="circle"></div>
+        )}
+
+        {isEdit && (
+          <div id="upload-image">
+            <Form.Group controlId="formFileSm" className="mb-3">
+              <Form.Control type="file" size="sm" onChange={uploadImage} />
+            </Form.Group>
+          </div>
+        )}
       </div>
       <div id="personal-user">
-        <Form>
+        <Form onSubmit={onSubmit}>
           <Form.Group className="mb-3" id="personal-from">
             <Form.Label id="title-user">Personal info</Form.Label>
             <br />
-            <Form.Label id="text-user">First name : </Form.Label>
-            <Form.Control type="first-name" id="input-user" />
-            <br />
-            <Form.Label id="text-user">Last name : </Form.Label>
-            <Form.Control type="last-name" id="input-user" />
+            <Form.Label id="text-user">Name : </Form.Label>
+            <Form.Control
+              type="first-name"
+              id="input-user"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              disabled={!isEdit}
+            />
             <br />
             <Form.Label id="text-user">Religion : </Form.Label>
             {["radio"].map((type) => (
@@ -37,6 +123,7 @@ function User() {
                   id={`inline-${type}-1`}
                   onChange={() => setReligion("buddhist")}
                   checked={religion === "buddhist"}
+                  disabled={!isEdit}
                 />
                 <Form.Check
                   inline
@@ -46,31 +133,65 @@ function User() {
                   id={`inline-${type}-2`}
                   onChange={() => setReligion("islam")}
                   checked={religion === "islam"}
+                  disabled={!isEdit}
                 />
                 <Form.Check
                   inline
                   label="คริสต์"
+                  name="group1"
                   type={type}
                   id={`inline-${type}-3`}
                   onChange={() => setReligion("christ")}
                   checked={religion === "christ"}
+                  disabled={!isEdit}
                 />
                 <Form.Check
                   inline
                   label="อื่นๆ"
+                  name="group1"
                   type={type}
                   id={`inline-${type}-4`}
                   onChange={() => setReligion("other")}
                   checked={religion === "other"}
+                  disabled={!isEdit}
                 />
               </div>
             ))}
-            <Form.Label id="text-user">Email : </Form.Label>
-            <Form.Control type="email" id="input-user" />
           </Form.Group>
-          <Button variant="primary" type="submit" id="button-user">
-            Apply
-          </Button>
+          {data?.id === user?.id && (
+            <>
+              <Button variant="primary" type="submit" className="button-user">
+                {isEdit ? "บันทึก" : "แก้ไข"}
+              </Button>
+              <Button
+                variant="danger"
+                className="button-user"
+                onClick={onDeleteClick}
+              >
+                ยกเลิกสมาชิก
+              </Button>
+            </>
+          )}
+          {user?.role === "admin" && user?.id !== data?.id && !data?.isBan && (
+            <Button
+              variant="danger"
+              className="button-user"
+              onClick={onBanClick}
+            >
+              ระงับการใช้งาน
+            </Button>
+          )}
+
+          {user?.role === "admin" && user?.id !== data?.id && data?.isBan && (
+            <Button
+              variant="primary"
+              className="button-user"
+              onClick={onUnBanClick}
+            >
+              ยกเลิกการระงับการใช้งาน
+            </Button>
+          )}
+
           <br />
         </Form>
       </div>
